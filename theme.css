@@ -18,8 +18,16 @@ button {
    text-align: center; 
 }
 
+#scoresContainer,
 #timer,
 #word {
     text-align: center;
+}
+
+#timer {
+    font-size: xx-large;
+}
+
+#word {
     font-size: large;
 }

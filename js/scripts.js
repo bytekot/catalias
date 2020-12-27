@@ -2,7 +2,8 @@ function init() {
     document.getElementById('gameContainer').setAttribute('style', 'visibility: hidden;');
     document.getElementById('startGameButton').addEventListener('click', startGame);
 
-    document.getElementById('nextWordButton').addEventListener('click', startRound);
+    document.getElementById('nextWordButton').addEventListener('click', nextWord);
+    document.getElementById('skipWordButton').addEventListener('click', skipWord);
 }
 
 function startGame() {
@@ -19,6 +20,30 @@ function startRound() {
 
 function setWord(word) {
     document.getElementById('word').textContent = word;
+}
+
+function nextWord() {
+    incrementRoundScores();
+    setWord(getRandomWord());
+}
+
+function skipWord() {
+    decrementRoundScores();
+    setWord(getRandomWord());
+}
+
+function incrementRoundScores() {
+    let scoresValueElement = document.getElementById('scoresValue');
+    let scoresValue = parseInt(scoresValueElement.textContent);
+
+    scoresValueElement.textContent = ++scoresValue;
+}
+
+function decrementRoundScores() {
+    let scoresValueElement = document.getElementById('scoresValue');
+    let scoresValue = parseInt(scoresValueElement.textContent);
+
+    scoresValueElement.textContent = --scoresValue;
 }
 
 function startTimer(start = 10, end = 0) {
