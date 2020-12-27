@@ -1,0 +1,25 @@
+body * {
+    margin-top: 5px;
+    font-family: sans-serif;
+}
+
+/* Buttons */
+button {
+    display: block;
+    margin: 10px auto;
+}
+
+#nextWordButton,
+#skipWordButton {
+    display: inline;
+}
+
+#inRoundButtons {
+   text-align: center; 
+}
+
+#timer,
+#word {
+    text-align: center;
+    font-size: large;
+}
