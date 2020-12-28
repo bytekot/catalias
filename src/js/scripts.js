@@ -25,30 +25,30 @@ function setWord(word) {
 }
 
 function nextWord() {
-    incrementRoundScores();
+    addToRoundScore(1);
     setWord(getRandomWord());
 }
 
 function skipWord() {
-    decrementRoundScores();
+    addToRoundScore(-1);
     setWord(getRandomWord());
 }
 
-function incrementRoundScores() {
-    let scoresValueElement = document.getElementById('scoresValue');
-    let scoresValue = parseInt(scoresValueElement.textContent);
+/**
+ * Add poits to the round score.
+ * @param {number} points - Points to add
+ * @returns updated round scores
+ */
+function addToRoundScore(points) {
+    let scoreElement = document.getElementById('score');
+    let newScore = parseInt(scoreElement.textContent) + points;
 
-    scoresValueElement.textContent = ++scoresValue;
+    scoreElement.textContent = newScore;
+
+    return newScore;
 }
 
-function decrementRoundScores() {
-    let scoresValueElement = document.getElementById('scoresValue');
-    let scoresValue = parseInt(scoresValueElement.textContent);
-
-    scoresValueElement.textContent = --scoresValue;
-}
-
-function startTimer(start = 10, end = 0) {
+function startTimer(start = 60, end = 0) {
     document.getElementById('timer').textContent = start;
 
     setTimeout(value => {
