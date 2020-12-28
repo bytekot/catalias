@@ -1,4 +1,7 @@
-import './js/scripts.js';
+import './js/init.js';
+import './js/app.js';
+import './js/game.js';
+import './js/round.js';
 import './js/words.js';
 import './scss/base.scss';
 import './scss/button.scss';
