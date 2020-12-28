@@ -1,0 +1,33 @@
+$border-radius: 3px;
+$background-color: rgb(45, 119, 246);
+
+body * {
+    margin-top: 5px;
+    font-family: sans-serif;
+
+    fieldset {
+        border: none;
+
+        legend {
+            font-size: large;
+        }
+    }
+
+    #inRoundButtonsContainer {
+        text-align: center; 
+    }
+
+    #scoresContainer,
+    #timer,
+    #word {
+        text-align: center;
+    }
+
+    #timer {
+        font-size: xx-large;
+    }
+
+    #word {
+        font-size: large;
+    }
+}

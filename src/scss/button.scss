@@ -1,0 +1,16 @@
+@import "base.scss";
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 15px;
+    background-color: $background-color;
+    color: #fff;
+    border: none;
+    border-radius: $border-radius;
+
+    &#nextWordButton,
+    &#skipWordButton {
+        display: inline;
+    }
+}
