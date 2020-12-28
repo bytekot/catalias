@@ -7,6 +7,6 @@ const WORDS = [
     'Хот-дог',
 ];
 
-function getRandomWord() {
+export function getRandomWord() {
     return WORDS[Math.floor(Math.random() * WORDS.length)];
 }

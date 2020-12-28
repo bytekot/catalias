@@ -1,3 +1,5 @@
+import { getRandomWord } from './words.js';
+
 function init() {
     document.getElementById('gameContainer').setAttribute('style', 'visibility: hidden;');
     document.getElementById('startGameButton').addEventListener('click', startGame);
