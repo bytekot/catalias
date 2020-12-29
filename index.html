@@ -14,12 +14,10 @@
             <fieldset>
                 <legend>Команды</legend>
                 <div class="field-container team-name-container">
-                    <!--label>Команда 1</label-->
                     <input id="team1-namefield" class="textfield" placeholder="Название команды 1" value="Бешеные псы" autofocus> VS
                 </div>
         
                 <div class="field-container team-name-container">
-                    <!--label>Команда 2</label-->
                     <input id="team2-namefield" class="textfield" placeholder="Название команды 2" value="Бесславные ублюдки">
                 </div>
             </fieldset>
@@ -34,9 +32,21 @@
         </div>
 
         <div id="gameContainer">
-            <div id="game-team1-name">Команда 1: <span id="game-team1-score">0</span></div>
-            <div id="game-team2-name">Команда 2: <span id="game-team2-score">0</span></div>
-            <div class="title">Ход команды <span id="round-team-name">1</span></div>
+            <div class="field-container">
+                <label id="game-team1-name"></label>:
+                <span id="game-team1-score">0</span>
+            </div>
+            <div class="field-container">
+                <label id="game-team2-name"></label>:
+                <span id="game-team2-score">0</span>
+            </div>
+            <div class="field-container">
+                <label>Очки для победы:</label>
+                <span id="game-score-to-win"></span>
+            </div>
+            <div class="title">
+                <span id="game-status">Ход</span> команды "<span id="game-current-team-name"></span>"
+            </div>
             <button id="startRoundButton">Начать ход</button>
         </div>
 

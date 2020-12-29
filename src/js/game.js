@@ -5,20 +5,27 @@ export class Game {
     constructor(team1Name, team2Name, options) {
         let self = this;
 
-        self.team1 = {
+        self.teams = [{
+            id: 1,
             name: team1Name,
             score: 0
-        };
-        self.team2 = {
+        }, {
+            id: 2,
             name: team2Name,
             score: 0
-        };
-
+        }];
+        self.currentTeam = self.teams[0];
         self.words = getWords();
         self.roundDuration = options.roundDuration;
         self.scoreToWin = options.scoreToWin;
-        self.currentTeam = self.team1;
-        self.onRoundEnd = options.onRoundEnd;
+    }
+
+    switchTeam() {
+        let self = this;
+        let nextTeamIndex = self.teams.indexOf(self.currentTeam) === 0 ? 1 : 0;
+
+        self.currentTeam = self.teams[nextTeamIndex];
+        document.getElementById('game-current-team-name').textContent = self.currentTeam.name;
     }
 
     startRound() {
@@ -27,7 +34,7 @@ export class Game {
             self.currentTeam,
             self.roundDuration,
             self.words,
-            self.onRoundEnd.bind(self)
+            self.endRound.bind(self)
         );
 
         self.currentRound = round;
@@ -36,7 +43,7 @@ export class Game {
         return self.currentRound;
     }
     
-    onRoundEnd(score) {
+    endRound(score) {
         let self = this;
         let currentTeam = self.currentTeam;
 
@@ -44,6 +51,17 @@ export class Game {
 
         delete self.currentRound;
 
-        self.onRoundEnd(currentTeam.name, currentTeam.score);
+        document.getElementById(`game-team${currentTeam.id}-score`).textContent = currentTeam.score;
+        document.getElementById('gameContainer').setAttribute('style', 'display: block;');
+        document.getElementById('roundContainer').setAttribute('style', 'display: none;');
+
+        if (currentTeam.score >= self.scoreToWin) {
+            document.getElementById('startRoundButton').setAttribute('style', 'display: none;');
+            document.getElementById('game-status').textContent = 'Победа';
+
+            return;
+        }
+
+        self.switchTeam();
     }
 }

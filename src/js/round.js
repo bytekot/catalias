@@ -6,12 +6,14 @@ export class Round {
         self.duration = duration;
         self.words = words;
         self.onRoundEnd = onRoundEnd;
+        self.teamScore = team.score;
         self.score = 0;
     }
 
     start() {
         let self = this;
 
+        document.getElementById('score').textContent = self.teamScore;
         self.changeWord();
         self.startTimer(self.duration, 0);
     }
@@ -50,19 +52,20 @@ export class Round {
         return this.words[Math.floor(Math.random() * this.words.length)];
     }  
 
+    // TODO
     /**
      * Add poits to the round score.
      * @param {number} points - Points to add
      * @returns {number} updated round scores
      */
     addToRoundScore(points) {
-        let scoreElement = document.getElementById('score');
-        let newScore = parseInt(scoreElement.textContent) + points;
+        let self = this;
+        self.score = self.score + points;
 
-        scoreElement.textContent = newScore;
-        this.score = newScore;
+        let totalScore = self.teamScore + self.score;
+        document.getElementById('score').textContent = totalScore;
 
-        return newScore;
+        return totalScore;
     }
 
     /**
