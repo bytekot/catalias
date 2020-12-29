@@ -24,7 +24,7 @@ export class Round {
     /**
      * Add poits to the round score.
      * @param {number} points - Points to add
-     * @returns updated round scores
+     * @returns {number} updated round scores
      */
     addToRoundScore(points) {
         let scoreElement = document.getElementById('score');

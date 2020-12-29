@@ -9,44 +9,49 @@
 </head>
 
 <body>
-    <div id="settingsContainer">
-        <fieldset>
-            <legend>Команды</legend>
-            <div>
-                <label>Команда 1</label>
-                <input placeholder="Название команды">
-            </div>
-    
-            <div>
-                <label>Команда 2</label>
-                <input placeholder="Название команды">
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Наборы слов</legend>
-            <div>
-                <input type="checkbox" checked>
-                <label>Базовый набор</label>
-            </div>
-            <div>
-                <input type="checkbox">
-                <label>Столицы мира</label>
-            </div>
-        </fieldset>
-        <button id="startGameButton">Начать игру</button>
-    </div>
-
-    <div id="gameContainer">
-        <div id="scoreContainer">
-            <label>Очки: </label>
-            <span id="score">0</span>
+    <div id="appContainer">
+        <div id="settingsContainer">
+            <fieldset>
+                <legend>Команды</legend>
+                <div class="field-container team-name-container">
+                    <!--label>Команда 1</label-->
+                    <input id="team1-namefield" class="textfield" placeholder="Название команды 1" value="Бешеные псы" autofocus> VS
+                </div>
+        
+                <div class="field-container team-name-container">
+                    <!--label>Команда 2</label-->
+                    <input id="team2-namefield" class="textfield" placeholder="Название команды 2" value="Бесславные ублюдки">
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Наборы слов</legend>
+                <div class="field-container">
+                    <input type="checkbox" checked disabled>
+                    <label>Базовый набор</label>
+                </div>
+            </fieldset>
+            <button id="startGameButton">Играть</button>
         </div>
-        <div id="timer"></div>
-        <div id="word">Test</div>
 
-        <div id="inRoundButtonsContainer">
-            <button id="skipWordButton">Пропустить слово</button>
-            <button id="nextWordButton">Следующее слово</button>
+        <div id="gameContainer">
+            <div id="game-team1-name">Команда 1: <span id="game-team1-score">0</span></div>
+            <div id="game-team2-name">Команда 2: <span id="game-team2-score">0</span></div>
+            <div class="title">Ход команды <span id="round-team-name">1</span></div>
+            <button id="startRoundButton">Начать ход</button>
+        </div>
+
+        <div id="roundContainer">
+            <div id="scoreContainer">
+                <label>Очки: </label>
+                <span id="score">0</span>
+            </div>
+            <div id="timer"></div>
+            <div id="word">Test</div>
+
+            <div id="inRoundButtonsContainer">
+                <button id="skipWordButton">Пропустить слово</button>
+                <button id="nextWordButton">Следующее слово</button>
+            </div>
         </div>
     </div>
 </body>
