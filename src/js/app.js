@@ -24,7 +24,7 @@ export class Catalias {
             {
                 roundDuration: 2,
                 scoreToWin: 5,
-                onRoundEnd: self.onRoundEnd.bind(self)
+                //onRoundEnd: self.onRoundEnd.bind(self)
             }
         );
 
@@ -43,11 +43,13 @@ export class Catalias {
         this.game.startRound();
     }
 
+    /*
     onRoundEnd(currentTeam) {
         document.getElementById(`game-team${currentTeam.id}-score`).textContent = currentTeam.score;
         document.getElementById('gameContainer').setAttribute('style', 'display: block;');
         document.getElementById('roundContainer').setAttribute('style', 'display: none;');
-    }
+    }\
+    */
 
     nextWord() {
         this.game.currentRound.nextWord();
