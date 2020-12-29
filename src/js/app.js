@@ -17,20 +17,21 @@ export class Catalias {
         let self = this;
         let team1Name = document.getElementById('team1-namefield').getAttribute('value');
         let team2Name = document.getElementById('team2-namefield').getAttribute('value');
+        let scoreToWin = 10;
 
         self.game = new Game(
             team1Name,
             team2Name,
             {
                 roundDuration: 5,
-                scoreToWin: 10
+                scoreToWin: scoreToWin
             }
         );
 
         document.getElementById('game-team1-name').textContent = team1Name;
         document.getElementById('game-team2-name').textContent = team2Name;
         document.getElementById('game-current-team-name').textContent = team1Name;
-        document.getElementById('game-score-to-win').textContent = 5;
+        document.getElementById('game-score-to-win').textContent = scoreToWin;
         document.getElementById('settingsContainer').setAttribute('style', 'display: none;');
         document.getElementById('gameContainer').setAttribute('style', 'display: block;');
     }
