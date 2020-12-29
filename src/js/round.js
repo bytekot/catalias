@@ -1,25 +1,54 @@
-import { getRandomWord } from './words.js';
 export class Round {
-    constructor() {}
+    constructor(team, duration, words, onRoundEnd) {
+        let self = this;
 
-    start() {
-        this.setWord(getRandomWord());
-        this.startTimer(60, 0);
+        self.team = team;
+        self.duration = duration;
+        self.words = words;
+        self.onRoundEnd = onRoundEnd;
+        self.score = 0;
     }
 
-    setWord(word) {
+    start() {
+        let self = this;
+
+        self.changeWord();
+        self.startTimer(self.duration, 0);
+    }
+
+    end() {
+        this.onRoundEnd(this.score);
+    }
+
+    changeWord() {
+        let word = this.getRandomWord();
+
+        this.currentWord = word;
         document.getElementById('word').textContent = word;
     }
 
     nextWord() {
-        this.addToRoundScore(1);
-        this.setWord(getRandomWord());
+        let self = this;
+
+        self.addToRoundScore(1);
+        self.words.splice(self.words.indexOf(self.currentWord), 1);
+        self.changeWord();
     }
 
     skipWord() {
-        this.addToRoundScore(-1);
-        this.setWord(getRandomWord());
+        let self = this;
+
+        self.addToRoundScore(-1);
+        self.changeWord();
     }
+
+    /**
+     * Returns a random word from game word list.
+     * @returns {string} word
+     */
+    getRandomWord() {
+        return this.words[Math.floor(Math.random() * this.words.length)];
+    }  
 
     /**
      * Add poits to the round score.
@@ -31,10 +60,16 @@ export class Round {
         let newScore = parseInt(scoreElement.textContent) + points;
 
         scoreElement.textContent = newScore;
+        this.score = newScore;
 
         return newScore;
     }
 
+    /**
+     * Starts round countdown.
+     * @param {number} start 
+     * @param {number} end 
+     */
     startTimer(start = 60, end = 0) {
         document.getElementById('timer').textContent = start;
 
@@ -43,6 +78,8 @@ export class Round {
 
             if (value >= end) {
                 this.startTimer(value);
+            } else {
+                this.end();
             }
         }, 1000, start);
     }

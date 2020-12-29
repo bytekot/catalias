@@ -20,6 +20,10 @@ const WORDS = [
     'Факир',
 ];
 
-export function getRandomWord() {
-    return WORDS[Math.floor(Math.random() * WORDS.length)];
+/**
+ * Returns a clone of the word list.
+ * @returns {array}
+ */
+export function getWords() {
+    return [...WORDS];
 }
