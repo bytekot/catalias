@@ -23,7 +23,7 @@ export class Catalias {
             team1Name,
             team2Name,
             {
-                roundDuration: 5,
+                roundDuration: 10,
                 scoreToWin: scoreToWin
             }
         );
