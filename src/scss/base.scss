@@ -43,96 +43,10 @@ body {
         height: 30px;
         width: 60px;
     }
-
-    #inRoundButtonsContainer {
-        text-align: center; 
-    }
-
-    #scoreContainer,
-    #timer,
-    #word {
-        text-align: center;
-    }
-
-    #timer {
-        font-size: xx-large;
-        padding: 10px 0 20px 0;
-    }
-
-    #word {
-        font-size: large;
-    }
 }
 
 .title {
     text-align: center;
     margin: 20px 0;
     font-size: large;
-}
-
-.round-card-container {
-    height: 250px;
-    width: 200px;
-    margin: auto;
-    padding: 15px 0 25px 0;
-    text-align: center;
-    --offset-multiplier: 4px;
-}
-
-.card {
-    position: absolute;
-    height: 250px;
-    width: 200px;
-    padding: 0 16px;
-    box-sizing: border-box;
-    background: #fff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px -4px 8px rgba(255, 255, 255, 0.8);
-    border-radius: 6px;
-    text-align: center;
-    --translate: calc(var(--offset) * var(--offset-multiplier));
-    transform: translate(var(--translate), var(--translate));
-    z-index: 5;
-    
-    @for $i from 1 through 5 {
-        &:nth-child(#{$i}) {
-            --offset: #{-1+$i};
-            z-index: #{5 - $i};
-        }
-    }
-
-    span {
-        line-height: 250px;
-    }
-}
-
-.progress-bar {
-	border-radius: 60px;
-	overflow: hidden;
-    width: 100%;
-
-	span {
-		display: block;
-	}
-}
-
-.bar {
-  background: rgba(0,0,0,0.075);
-}
-
-.progress {
-  animation: loader 10s linear forwards;
-  background: #75b800;
-  color: #fff;
-  padding: 5px;
-  width: 0;
-}
-
-@keyframes loader {
-	from {
-		width: 100%;
-    }
-
-	to {
-		width: 0;
-	}
 }

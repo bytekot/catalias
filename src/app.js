@@ -5,3 +5,4 @@ import './js/round.js';
 import './js/words.js';
 import './scss/base.scss';
 import './scss/button.scss';
+import './scss/round.scss';

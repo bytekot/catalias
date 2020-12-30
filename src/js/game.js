@@ -21,6 +21,37 @@ export class Game {
         self.words = getWords();
         self.roundDuration = options.roundDuration;
         self.scoreToWin = options.scoreToWin;
+        self.template = [
+            '<div id="gameContainer">',
+                '<div class="field-container">',
+                    '<label id="game-team1-name"></label>:',
+                    '<span id="game-team1-score">0</span>',
+                '</div>',
+                '<div class="field-container">',
+                   ' <label id="game-team2-name"></label>:',
+                    '<span id="game-team2-score">0</span>',
+                '</div>',
+                '<div class="field-container">',
+                    '<label>Очки для победы:</label>',
+                    '<span id="game-score-to-win"></span>',
+                '</div>',
+                '<div class="title">',
+                    '<span id="game-status">Ход</span> команды "<span id="game-current-team-name"></span>',
+                '</div>',
+                '<button id="startRoundButton">Начать ход</button>',
+            '</div>',
+        ]
+    }
+
+    start() {
+        let self = this;
+
+        document.getElementById('appContainer').insertAdjacentHTML('beforeend', self.template.join(''));
+        document.getElementById('startRoundButton').addEventListener('click', self.startRound.bind(self), false);
+        document.getElementById('game-team1-name').textContent = self.teams[0].name;
+        document.getElementById('game-team2-name').textContent = self.teams[1].name;
+        document.getElementById('game-current-team-name').textContent = self.teams[0].name;
+        document.getElementById('game-score-to-win').textContent = self.scoreToWin;
     }
 
     switchTeam() {
@@ -46,6 +77,8 @@ export class Game {
             self.endRound.bind(self)
         );
 
+        document.getElementById('gameContainer').setAttribute('style', 'display: none;');
+
         self.currentRound = round;
         self.currentRound.start();
 
@@ -65,7 +98,6 @@ export class Game {
 
         document.getElementById(`game-team${currentTeam.id}-score`).textContent = currentTeam.score;
         document.getElementById('gameContainer').setAttribute('style', 'display: block;');
-        document.getElementById('roundContainer').setAttribute('style', 'display: none;');
 
         if (team1.rounds !== team2.rounds || (team1.score < self.scoreToWin && team2.score < self.scoreToWin)) {
             self.switchTeam();
