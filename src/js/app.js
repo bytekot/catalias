@@ -53,7 +53,7 @@ export class Catalias extends Base {
             self.getTeamName(1),
             self.getTeamName(2),
             {
-                roundDuration: 100,
+                moveDuration: 100,
                 scoreToWin: 10,
                 onGameEnd: self.onGameEnd.bind(self)
             }

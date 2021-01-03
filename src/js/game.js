@@ -1,5 +1,5 @@
 import { Base } from './base.js';
-import { Round } from './round.js';
+import { Move } from './move.js';
 import { getWords } from './words.js';
 
 export class Game extends Base {
@@ -13,17 +13,17 @@ export class Game extends Base {
             id: 1,
             name: team1Name,
             score: 0,
-            rounds: 0
+            moves: 0
         }, {
             id: 2,
             name: team2Name,
             score: 0,
-            rounds: 0
+            moves: 0
         }];
         self.elementId = 'gameContainer';
         self.currentTeam = self.teams[0];
         self.words = getWords();
-        self.roundDuration = options.roundDuration;
+        self.moveDuration = options.moveDuration;
         self.scoreToWin = options.scoreToWin;
         self.onGameEnd = options.onGameEnd;
         self.template = [
@@ -45,7 +45,7 @@ export class Game extends Base {
                 '</div>',
 
                 '<div class="button-container">',
-                    '<button id="startRoundButton">Начать ход</button>',
+                    '<button id="game-button-start-move">Начать ход</button>',
                     '<button id="game-button-new-game">Новая игра</button>',
                 '</div>',
             '</div>',
@@ -56,7 +56,7 @@ export class Game extends Base {
         let self = this;
 
         self.render();
-        self.addListener('startRoundButton', 'click', 'startRound');
+        self.addListener('game-button-start-move', 'click', 'startMove');
         self.addListener('game-button-new-game', 'click', 'end');
         self.addClass('game-button-new-game', 'hidden');
         self.setText('game-team1-name', self.teams[0].name);
@@ -100,44 +100,44 @@ export class Game extends Base {
     }
 
     /**
-     * Starts a new game round.
-     * @returns {Round} The Round class instance
+     * Starts a new game move.
+     * @returns {Move} The Move class instance
      */
-    startRound() {
+    startMove() {
         let self = this;
-        let round = new Round(
+        let move = new Move(
             self.currentTeam,
-            self.roundDuration,
+            self.moveDuration,
             self.words,
-            self.endRound.bind(self)
+            self.endMove.bind(self)
         );
 
         //self.addClass('gameContainer', 'hidden');
 
         document.getElementById('gameContainer').setAttribute('style', 'display: none;');
 
-        self.currentRound = round;
-        self.currentRound.start();
+        self.currentMove = move;
+        self.currentMove.start();
 
-        return self.currentRound;
+        return self.currentMove;
     }
     
-    endRound(score) {
+    endMove(score) {
         let self = this;
         let team1 = self.teams[0];
         let team2 = self.teams[1];
         let currentTeam = self.currentTeam;
 
-        currentTeam.rounds++;
+        currentTeam.moves++;
         currentTeam.score = currentTeam.score + score;
 
-        delete self.currentRound;
+        delete self.currentMove;
 
         self.setText(`game-team${currentTeam.id}-score`, currentTeam.score);
         //document.getElementById(`game-team${currentTeam.id}-score`).textContent = currentTeam.score;
         document.getElementById('gameContainer').setAttribute('style', 'display: block;');
 
-        if (team1.rounds !== team2.rounds || (team1.score < self.scoreToWin && team2.score < self.scoreToWin)) {
+        if (team1.moves !== team2.moves || (team1.score < self.scoreToWin && team2.score < self.scoreToWin)) {
             self.switchTeam();
             return;
         }
@@ -158,7 +158,7 @@ export class Game extends Base {
         /*document.getElementById('game-current-team-name').textContent = team1.score > team2.score
             ? team1.name
             : team2.name;*/
-        document.getElementById('startRoundButton').setAttribute('style', 'display: none;');
+        document.getElementById('game-button-start-move').setAttribute('style', 'display: none;');
         document.getElementById('game-button-new-game').setAttribute('style', 'display: block;');
     }
 }

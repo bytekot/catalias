@@ -1,16 +1,16 @@
 import { Base } from './base.js';
 
-export class Round extends Base {
-    constructor(team, duration, words, onRoundEnd) {
+export class Move extends Base {
+    constructor(team, duration, words, onMoveEnd) {
         super();
 
         let self = this;
 
-        self.elementId = 'round-container';
+        self.elementId = 'move-container';
         self.team = team;
         self.duration = duration;
         self.words = words;
-        self.onRoundEnd = onRoundEnd;
+        self.onMoveEnd = onMoveEnd;
         self.teamScore = team.score;
         self.score = 0;
         self.template = [
@@ -20,51 +20,51 @@ export class Round extends Base {
                         '<span class="progress"></span>',
                     '</span>',
                 '</div>',
-                '<div id="round-timer"></div>',
-                '<div id="round-score-container">',
+                '<div id="move-timer"></div>',
+                '<div id="move-score-container">',
                     '<label>Очки: </label>',
-                    `<span id="round-score">${self.teamScore}</span>`,
+                    `<span id="move-score">${self.teamScore}</span>`,
                 '</div>',
-                '<div class="round-card-container">',
+                '<div class="move-card-container">',
                     '<div class="card">',
-                        '<span id="round-word"></span>',
+                        '<span id="move-word"></span>',
                     '</div>',
                     '<div class="card"></div>',
                     '<div class="card"></div>',
                 '</div>',
 
-                '<div id="round-buttons-container">',
-                    '<button id="round-button-skip">Пропустить слово</button>',
-                    '<button id="round-button-next">Следующее слово</button>',
+                '<div id="move-buttons-container">',
+                    '<button id="move-button-skip">Пропустить слово</button>',
+                    '<button id="move-button-next">Следующее слово</button>',
                 '</div>',
             '</div >',
         ];
     }
 
     /**
-     * Renders the round view.
-     * Inits handlers of round buttons.
+     * Renders the move view.
+     * Inits handlers of move buttons.
      * Sets the first word, starts the timer.
      */
     start() {
         let self = this;
 
         self.render();
-        self.addListener('round-button-skip', 'click', 'skipWord');
-        self.addListener('round-button-next', 'click', 'nextWord');
+        self.addListener('move-button-skip', 'click', 'skipWord');
+        self.addListener('move-button-next', 'click', 'nextWord');
         self.changeWord();
         self.startTimer(self.duration);
     }
 
     /**
-     * Removes the round view.
+     * Removes the move view.
      * Calls the appropriate game handler.
      */
     end() {
         let self = this;
 
         self.destroy();
-        self.onRoundEnd(self.score);
+        self.onMoveEnd(self.score);
     }
 
     /**
@@ -75,7 +75,7 @@ export class Round extends Base {
         let word = self.getRandomWord();
 
         self.currentWord = word;
-        self.setText('round-word', word);
+        self.setText('move-word', word);
     }
 
     /**
@@ -112,7 +112,7 @@ export class Round extends Base {
     }  
 
     /**
-     * Adds poits to the round score; updates the total score view.
+     * Adds poits to the move score; updates the total score view.
      *
      * @param {number} value - Points to add
      */
@@ -120,18 +120,18 @@ export class Round extends Base {
         let self = this;
 
         self.score = self.score + value;
-        self.setText('round-score', self.teamScore + self.score);
+        self.setText('move-score', self.teamScore + self.score);
     }
 
     /**
-     * Starts the round countdown. Updates the view.
+     * Starts the move countdown. Updates the view.
      *
      * @param {number} start - Reference position
      */
     startTimer(start = 60) {
         let self = this;
 
-        self.setText('round-timer', start);
+        self.setText('move-timer', start);
 
         setTimeout(value => {
             value--;

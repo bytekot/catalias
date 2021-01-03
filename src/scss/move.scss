@@ -1,6 +1,6 @@
 @import "button.scss";
 
-#round-container {
+#move-container {
     .progress-bar {
         border-radius: 60px;
         overflow: hidden;
@@ -23,7 +23,7 @@
         }
     }
 
-    .round-card-container {
+    .move-card-container {
         height: 250px;
         width: 200px;
         margin: auto;
@@ -58,19 +58,19 @@
         }
     }
 
-    #round-score-container,
-    #round-buttons-container,
-    #round-timer,
-    #round-word {
+    #move-score-container,
+    #move-buttons-container,
+    #move-timer,
+    #move-word {
         text-align: center;
     }
 
-    #round-timer {
+    #move-timer {
         font-size: xx-large;
         padding: 10px 0 20px 0;
     }
 
-    #round-word {
+    #move-word {
         font-size: large;
     }
 }
