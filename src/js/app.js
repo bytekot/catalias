@@ -1,10 +1,12 @@
+import { Base } from './base.js';
 import { Game } from './game.js';
 
-export class Catalias {
+export class Catalias extends Base {
     constructor() {
-        let self = this;
+        super();
 
-        self.template = [
+        this.elementId = 'settingsContainer';
+        this.template = [
             '<div id="settingsContainer">',
                 '<fieldset>',
                     '<legend>Команды</legend>',
@@ -23,7 +25,10 @@ export class Catalias {
                         '<label>Базовый набор</label>',
                     '</div>',
                 '</fieldset>',
-                '<button id="startGameButton">Играть</button>',
+
+                '<div class="button-container">',
+                    '<button id="startGameButton">Играть</button>',
+                '</div>',
             '</div>',
         ];
     }
@@ -31,25 +36,31 @@ export class Catalias {
     init() {
         let self = this;
 
-        document.getElementById('appContainer').insertAdjacentHTML('beforeend', self.template.join(''));
-        document.getElementById('startGameButton').addEventListener('click', self.startGame.bind(self), false);
+        self.render();
+        self.addListener('startGameButton', 'click', 'startGame');
+    }
+
+    getTeamName(teamIndex) {
+        return this.getFieldValue(`team${teamIndex}-namefield`);
     }
 
     startGame() {
         let self = this;
-        let team1Name = document.getElementById('team1-namefield').getAttribute('value');
-        let team2Name = document.getElementById('team2-namefield').getAttribute('value');
-        let scoreToWin = 10;
 
-        document.getElementById('settingsContainer').setAttribute('style', 'display: none;');
+        self.addClass(self.elementId, 'hidden');
 
         self.game = new Game(
-            team1Name,
-            team2Name,
+            self.getTeamName(1),
+            self.getTeamName(2),
             {
-                roundDuration: 10,
-                scoreToWin: scoreToWin
+                roundDuration: 100,
+                scoreToWin: 10,
+                onGameEnd: self.onGameEnd.bind(self)
             }
         ).start();
+    }
+
+    onGameEnd() {
+        this.removeClass(self.elementId, 'hidden');
     }
 }

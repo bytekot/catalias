@@ -1,5 +1,9 @@
-export class Round {
+import { Base } from './base.js';
+
+export class Round extends Base {
     constructor(team, duration, words, onRoundEnd) {
+        super();
+
         let self = this;
 
         self.elementId = 'round-container';
@@ -27,7 +31,6 @@ export class Round {
                     '</div>',
                     '<div class="card"></div>',
                     '<div class="card"></div>',
-                    '<div class="card"></div>',
                 '</div>',
 
                 '<div id="round-buttons-container">',
@@ -46,10 +49,9 @@ export class Round {
     start() {
         let self = this;
 
-        document.getElementById('appContainer').insertAdjacentHTML('beforeend', self.template.join(''));
-        document.getElementById('round-button-skip').addEventListener('click', self.skipWord.bind(self), false);
-        document.getElementById('round-button-next').addEventListener('click', self.nextWord.bind(self), false);
-
+        self.render();
+        self.addListener('round-button-skip', 'click', 'skipWord');
+        self.addListener('round-button-next', 'click', 'nextWord');
         self.changeWord();
         self.startTimer(self.duration);
     }
@@ -60,10 +62,8 @@ export class Round {
      */
     end() {
         let self = this;
-        let element = document.getElementById(self.elementId);
 
-        element.parentNode.removeChild(element);
-
+        self.destroy();
         self.onRoundEnd(self.score);
     }
 
@@ -71,10 +71,11 @@ export class Round {
      * Sets another current word selected randomly. Updates the view.
      */
     changeWord() {
-        let word = this.getRandomWord();
-        this.currentWord = word;
+        let self = this;
+        let word = self.getRandomWord();
 
-        document.getElementById('round-word').textContent = word;
+        self.currentWord = word;
+        self.setText('round-word', word);
     }
 
     /**
@@ -117,9 +118,9 @@ export class Round {
      */
     addPoints(value) {
         let self = this;
-        self.score = self.score + value;
 
-        document.getElementById('round-score').textContent = self.teamScore + self.score;
+        self.score = self.score + value;
+        self.setText('round-score', self.teamScore + self.score);
     }
 
     /**
@@ -128,15 +129,17 @@ export class Round {
      * @param {number} start - Reference position
      */
     startTimer(start = 60) {
-        document.getElementById('round-timer').textContent = start;
+        let self = this;
+
+        self.setText('round-timer', start);
 
         setTimeout(value => {
             value--;
 
             if (value >= 0) {
-                this.startTimer(value);
+                self.startTimer(value);
             } else {
-                this.end();
+                self.end();
             }
         }, 1000, start);
     }

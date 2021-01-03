@@ -1,8 +1,11 @@
+import { Base } from './base.js';
 import { Round } from './round.js';
 import { getWords } from './words.js';
 
-export class Game {
+export class Game extends Base {
     constructor(team1Name, team2Name, options) {
+        super();
+
         let self = this;
 
         // TODO
@@ -17,12 +20,14 @@ export class Game {
             score: 0,
             rounds: 0
         }];
+        self.elementId = 'gameContainer';
         self.currentTeam = self.teams[0];
         self.words = getWords();
         self.roundDuration = options.roundDuration;
         self.scoreToWin = options.scoreToWin;
+        self.onGameEnd = options.onGameEnd;
         self.template = [
-            '<div id="gameContainer">',
+            `<div id="${self.elementId}">`,
                 '<div class="field-container">',
                     '<label id="game-team1-name"></label>:',
                     '<span id="game-team1-score">0</span>',
@@ -38,7 +43,11 @@ export class Game {
                 '<div class="title">',
                     '<span id="game-status">Ход</span> команды "<span id="game-current-team-name"></span>',
                 '</div>',
-                '<button id="startRoundButton">Начать ход</button>',
+
+                '<div class="button-container">',
+                    '<button id="startRoundButton">Начать ход</button>',
+                    '<button id="game-button-new-game">Новая игра</button>',
+                '</div>',
             '</div>',
         ]
     }
@@ -46,14 +55,32 @@ export class Game {
     start() {
         let self = this;
 
-        document.getElementById('appContainer').insertAdjacentHTML('beforeend', self.template.join(''));
-        document.getElementById('startRoundButton').addEventListener('click', self.startRound.bind(self), false);
-        document.getElementById('game-team1-name').textContent = self.teams[0].name;
-        document.getElementById('game-team2-name').textContent = self.teams[1].name;
-        document.getElementById('game-current-team-name').textContent = self.teams[0].name;
-        document.getElementById('game-score-to-win').textContent = self.scoreToWin;
+        self.render();
+        self.addListener('startRoundButton', 'click', 'startRound');
+        self.addListener('game-button-new-game', 'click', 'end');
+        self.addClass('game-button-new-game', 'hidden');
+        self.setText('game-team1-name', self.teams[0].name);
+        self.setText('game-team2-name', self.teams[1].name);
+        self.setText('game-current-team-name', self.teams[0].name);
+        self.setText('game-score-to-win', self.scoreToWin);
     }
 
+    /**
+     * Removes the Game view.
+     * Calls the appropriate game handler.
+     */
+    end() {
+        let self = this;
+        let element = document.getElementById(self.elementId);
+
+        element.parentNode.removeChild(element);
+
+        self.onGameEnd();
+    }
+
+    /**
+     * Switches the current team. Updates the view.
+     */
     switchTeam() {
         let self = this;
         self.currentTeam = self.getNextTeam();
@@ -61,6 +88,10 @@ export class Game {
         document.getElementById('game-current-team-name').textContent = self.currentTeam.name;
     }
 
+    /**
+     * Returns the next team data.
+     * @returns {object}
+     */
     getNextTeam() {
         let self = this;
         let nextTeamIndex = self.teams.indexOf(self.currentTeam) === 0 ? 1 : 0;
@@ -68,6 +99,10 @@ export class Game {
         return self.teams[nextTeamIndex];
     }
 
+    /**
+     * Starts a new game round.
+     * @returns {Round} The Round class instance
+     */
     startRound() {
         let self = this;
         let round = new Round(
@@ -76,6 +111,8 @@ export class Game {
             self.words,
             self.endRound.bind(self)
         );
+
+        //self.addClass('gameContainer', 'hidden');
 
         document.getElementById('gameContainer').setAttribute('style', 'display: none;');
 
@@ -96,7 +133,8 @@ export class Game {
 
         delete self.currentRound;
 
-        document.getElementById(`game-team${currentTeam.id}-score`).textContent = currentTeam.score;
+        self.setText(`game-team${currentTeam.id}-score`, currentTeam.score);
+        //document.getElementById(`game-team${currentTeam.id}-score`).textContent = currentTeam.score;
         document.getElementById('gameContainer').setAttribute('style', 'display: block;');
 
         if (team1.rounds !== team2.rounds || (team1.score < self.scoreToWin && team2.score < self.scoreToWin)) {
@@ -106,14 +144,21 @@ export class Game {
 
         if (team1.score === team2.score) {
             self.switchTeam();
-            document.getElementById('game-status').textContent = 'Дополнительный ход';
+            self.setText('game-status', 'Дополнительный ход');
+            //document.getElementById('game-status').textContent = 'Дополнительный ход';
             return;
         }
 
-        document.getElementById('game-status').textContent = 'Победа';
-        document.getElementById('game-current-team-name').textContent = team1.score > team2.score
+        self.setText('game-status', 'Победа');
+        //document.getElementById('game-status').textContent = 'Победа';
+        self.setText('game-current-team-name', team1.score > team2.score
             ? team1.name
-            : team2.name;
+            : team2.name
+        );
+        /*document.getElementById('game-current-team-name').textContent = team1.score > team2.score
+            ? team1.name
+            : team2.name;*/
         document.getElementById('startRoundButton').setAttribute('style', 'display: none;');
+        document.getElementById('game-button-new-game').setAttribute('style', 'display: block;');
     }
 }

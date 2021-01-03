@@ -1,17 +1,15 @@
 @import "base.scss";
 
 button {
-    display: block;
-    margin: 30px auto;
+    margin: 30px 10px 0 0;
     padding: 10px 15px;
     background-color: $background-color;
     color: #fff;
     border: none;
     border-radius: $border-radius;
     cursor: pointer;
+}
 
-    &#nextWordButton,
-    &#skipWordButton {
-        display: inline;
-    }
+.button-container {
+    text-align: center;
 }
