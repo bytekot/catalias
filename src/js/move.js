@@ -4,17 +4,15 @@ export class Move extends Base {
     constructor(team, duration, words, onMoveEnd) {
         super();
 
-        let self = this;
-
-        self.elementId = 'move-container';
-        self.team = team;
-        self.duration = duration;
-        self.words = words;
-        self.onMoveEnd = onMoveEnd;
-        self.teamScore = team.score;
-        self.score = 0;
-        self.template = [
-            `<div id="${self.elementId}">`,
+        this.elementId = 'move-container';
+        this.team = team;
+        this.duration = duration;
+        this.words = words;
+        this.onMoveEnd = onMoveEnd;
+        this.teamScore = team.score;
+        this.score = 0;
+        this.template = [
+            `<div id="${this.elementId}">`,
                 '<div class="progress-bar" >',
                     '<span class="bar">',
                         '<span class="progress"></span>',
@@ -23,7 +21,7 @@ export class Move extends Base {
                 '<div id="move-timer"></div>',
                 '<div id="move-score-container">',
                     '<label>Очки: </label>',
-                    `<span id="move-score">${self.teamScore}</span>`,
+                    `<span id="move-score">${this.teamScore}</span>`,
                 '</div>',
                 '<div class="move-card-container">',
                     '<div class="card">',
@@ -47,13 +45,11 @@ export class Move extends Base {
      * Sets the first word, starts the timer.
      */
     start() {
-        let self = this;
-
-        self.render();
-        self.addListener('move-button-skip', 'click', 'skipWord');
-        self.addListener('move-button-next', 'click', 'nextWord');
-        self.changeWord();
-        self.startTimer(self.duration);
+        this.render();
+        this.addListener('move-button-skip', 'click', 'skipWord');
+        this.addListener('move-button-next', 'click', 'nextWord');
+        this.changeWord();
+        this.startTimer(this.duration);
     }
 
     /**
@@ -61,21 +57,18 @@ export class Move extends Base {
      * Calls the appropriate game handler.
      */
     end() {
-        let self = this;
-
-        self.destroy();
-        self.onMoveEnd(self.score);
+        this.destroy();
+        this.onMoveEnd(this.score);
     }
 
     /**
      * Sets another current word selected randomly. Updates the view.
      */
     changeWord() {
-        let self = this;
-        let word = self.getRandomWord();
+        let word = this.getRandomWord();
 
-        self.currentWord = word;
-        self.setText('move-word', word);
+        this.currentWord = word;
+        this.setText('move-word', word);
     }
 
     /**
@@ -85,21 +78,17 @@ export class Move extends Base {
      *   - changes the word.
      */
     nextWord() {
-        let self = this;
-
-        self.addPoints(1);
-        self.words.splice(self.words.indexOf(self.currentWord), 1);
-        self.changeWord();
+        this.addPoints(1);
+        this.words.splice(this.words.indexOf(this.currentWord), 1);
+        this.changeWord();
     }
 
     /**
      * The "Skip" button handler: decrements the score, changes the word.
      */
     skipWord() {
-        let self = this;
-
-        self.addPoints(-1);
-        self.changeWord();
+        this.addPoints(-1);
+        this.changeWord();
     }
 
     /**
@@ -112,15 +101,13 @@ export class Move extends Base {
     }  
 
     /**
-     * Adds poits to the move score; updates the total score view.
+     * Adds points to the move score; updates the total score view.
      *
      * @param {number} value - Points to add
      */
     addPoints(value) {
-        let self = this;
-
-        self.score = self.score + value;
-        self.setText('move-score', self.teamScore + self.score);
+        this.score = this.score + value;
+        this.setText('move-score', this.teamScore + this.score);
     }
 
     /**
@@ -129,18 +116,18 @@ export class Move extends Base {
      * @param {number} start - Reference position
      */
     startTimer(start = 60) {
-        let self = this;
-
-        self.setText('move-timer', start);
+        this.setText('move-timer', start);
 
         setTimeout(value => {
             value--;
 
             if (value >= 0) {
-                self.startTimer(value);
+                this.startTimer(value);
             } else {
-                self.end();
+                this.end();
             }
         }, 1000, start);
     }
 }
+
+// https://www.typescriptlang.org/play?#code/MYGwhgzhAEDiYFsCm0DeAoaXoAcCuARiAJbDQBOSYAJgPYB2IAntAC5UIQBcFVdjLACocA2gF0A3Jmz4ipXjQbNo1Uq2IMw5JjwAiajfS1Mp0rMAYRW5PMFa1yACnaJu0YYnEAaFQc3a9PyNtAEo0aDNsLFYAC2IIADoXTmgAXjYOCCkoqNj4hNU7Q2M03yL-E0iAX3RI2RIyAHMkVgBhPHJKelYPBEcwjBzsSlYO+mg8emokADNieiRqbOwausIGtlIAa360SKiRsYmp2fnF5awa1dBIGF69qPr5SkUBaCNkHityecbTKIs9G+tnsTg+SC+1l+A322DyiXBpXBF2gV1qNyg0AASrRJtQ9uhruBMQBZWgANxQgxkP3JYHYCn4ygQFKQgmIyAA7iTiCASBAkIDqG56HgEAQkOQUThafSUPNiOowCAeXz4oKGMKeKLxZLoAAfY7TOYLJZ1WUM4AdLqsVX8jVTEViiXkA1G06m-7YQHAuwORwsyns5B29VCp268gwobROKJQNsjlIbm8+3h0oJ4NIUMC8Mo1ZRKxaViOBVKlWpsOaiMu6Mx+EJMvEZU5h3C0pNluV3PV-O1XLbRxWzpIbqt8Pa52SutDBvDm3j6uleej23dttZar97DxABiCogMUWu2pQ2IM2gzjjjfoiubFbVPcd0AAZC+2NeV2P1+GZzGsIc5DjHO1qrouz4ALQfvknYPmmS4AHzQfGrJZimj4biiUQFjGgHjDMyoCn2RK3NA+jlMELCnrg6zPHwSgsJyDhaoyDHQN8vziF65iWNYIL+kx5AsRx9CNOIf65Negntuk0mbthhK1OgPqsBkiAAIxIsm7gcI4ADk9zqXpIRSCpakIAATFpnI6Yg+n3BZxmmGZhTqBU1lkUExiOCIenSUZPh+cxjmBdJADMeliCZSlmY0iAoOkCw2fAyA+ck6k+MkFliD4rnFKEzm8dACYeWSlKOOpAAM1XRegCYJEW5AlrocoJPQtCcv0tUCj0Sa4iWuypEhqARFE9XqMAOwtewbUdV1KI+rQIBIAkIC0I0Aaso2ED7reh7HiE0VVD4ACsNWmAA9Bd0BxcgSSZKUXHoFdN3xfdrgJPgh6OEltl9AZHDQBFh1SC96VtfFpR6bQtA4BAekSEAA

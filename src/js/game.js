@@ -6,10 +6,7 @@ export class Game extends Base {
     constructor(team1Name, team2Name, options) {
         super();
 
-        let self = this;
-
-        // TODO
-        self.teams = [{
+        this.teams = [{
             id: 1,
             name: team1Name,
             score: 0,
@@ -20,49 +17,43 @@ export class Game extends Base {
             score: 0,
             moves: 0
         }];
-        self.elementId = 'gameContainer';
-        self.currentTeam = self.teams[0];
-        self.words = getWords();
-        self.moveDuration = options.moveDuration;
-        self.scoreToWin = options.scoreToWin;
-        self.onGameEnd = options.onGameEnd;
-        self.template = [
-            `<div id="${self.elementId}">`,
+        this.elementId = 'game-container';
+        this.currentTeam = this.teams[0];
+        this.words = getWords();
+        this.moveDuration = options.moveDuration;
+        this.scoreToWin = options.scoreToWin;
+        this.onGameEnd = options.onGameEnd;
+        this.template = [
+            `<div id="${this.elementId}">`,
                 '<div class="field-container">',
-                    '<label id="game-team1-name"></label>:',
+                    `<label id="game-team1-name">${team1Name}</label>: `,
                     '<span id="game-team1-score">0</span>',
                 '</div>',
                 '<div class="field-container">',
-                   ' <label id="game-team2-name"></label>:',
+                    `<label id="game-team2-name">${team2Name}</label>: `,
                     '<span id="game-team2-score">0</span>',
                 '</div>',
                 '<div class="field-container">',
-                    '<label>Очки для победы:</label>',
-                    '<span id="game-score-to-win"></span>',
+                    '<label>Очки для победы: </label>',
+                    `<span id="game-score-to-win">${this.scoreToWin}</span>`,
                 '</div>',
                 '<div class="title">',
-                    '<span id="game-status">Ход</span> команды "<span id="game-current-team-name"></span>',
+                    '<span id="game-status">Ход</span> команды "',
+                        `<span id="game-current-team-name">${team1Name}</span>"`,
                 '</div>',
 
                 '<div class="button-container">',
                     '<button id="game-button-start-move">Начать ход</button>',
-                    '<button id="game-button-new-game">Новая игра</button>',
+                    '<button id="game-button-new-game" class="hidden">Новая игра</button>',
                 '</div>',
             '</div>',
         ]
     }
 
     start() {
-        let self = this;
-
-        self.render();
-        self.addListener('game-button-start-move', 'click', 'startMove');
-        self.addListener('game-button-new-game', 'click', 'end');
-        self.addClass('game-button-new-game', 'hidden');
-        self.setText('game-team1-name', self.teams[0].name);
-        self.setText('game-team2-name', self.teams[1].name);
-        self.setText('game-current-team-name', self.teams[0].name);
-        self.setText('game-score-to-win', self.scoreToWin);
+        this.render();
+        this.addListener('game-button-start-move', 'click', 'startMove');
+        this.addListener('game-button-new-game', 'click', 'end');
     }
 
     /**
@@ -70,22 +61,16 @@ export class Game extends Base {
      * Calls the appropriate game handler.
      */
     end() {
-        let self = this;
-        let element = document.getElementById(self.elementId);
-
-        element.parentNode.removeChild(element);
-
-        self.onGameEnd();
+        this.destroy();
+        this.onGameEnd();
     }
 
     /**
      * Switches the current team. Updates the view.
      */
     switchTeam() {
-        let self = this;
-        self.currentTeam = self.getNextTeam();
-
-        document.getElementById('game-current-team-name').textContent = self.currentTeam.name;
+        this.currentTeam = this.getNextTeam();
+        this.setText('game-current-team-name', this.currentTeam.name);
     }
 
     /**
@@ -93,10 +78,9 @@ export class Game extends Base {
      * @returns {object}
      */
     getNextTeam() {
-        let self = this;
-        let nextTeamIndex = self.teams.indexOf(self.currentTeam) === 0 ? 1 : 0;
+        let nextTeamIndex = this.teams.indexOf(this.currentTeam) === 0 ? 1 : 0;
 
-        return self.teams[nextTeamIndex];
+        return this.teams[nextTeamIndex];
     }
 
     /**
@@ -104,61 +88,51 @@ export class Game extends Base {
      * @returns {Move} The Move class instance
      */
     startMove() {
-        let self = this;
         let move = new Move(
-            self.currentTeam,
-            self.moveDuration,
-            self.words,
-            self.endMove.bind(self)
+            this.currentTeam,
+            this.moveDuration,
+            this.words,
+            this.endMove.bind(this)
         );
 
-        //self.addClass('gameContainer', 'hidden');
+        this.addClass(this.elementId, 'hidden');
+        this.currentMove = move;
+        this.currentMove.start();
 
-        document.getElementById('gameContainer').setAttribute('style', 'display: none;');
-
-        self.currentMove = move;
-        self.currentMove.start();
-
-        return self.currentMove;
+        return this.currentMove;
     }
     
     endMove(score) {
-        let self = this;
-        let team1 = self.teams[0];
-        let team2 = self.teams[1];
-        let currentTeam = self.currentTeam;
+        let team1 = this.teams[0];
+        let team2 = this.teams[1];
+        let currentTeam = this.currentTeam;
 
         currentTeam.moves++;
         currentTeam.score = currentTeam.score + score;
 
-        delete self.currentMove;
+        delete this.currentMove;
 
-        self.setText(`game-team${currentTeam.id}-score`, currentTeam.score);
-        //document.getElementById(`game-team${currentTeam.id}-score`).textContent = currentTeam.score;
-        document.getElementById('gameContainer').setAttribute('style', 'display: block;');
+        this.setText(`game-team${currentTeam.id}-score`, currentTeam.score);
+        this.removeClass(this.elementId, 'hidden');
 
-        if (team1.moves !== team2.moves || (team1.score < self.scoreToWin && team2.score < self.scoreToWin)) {
-            self.switchTeam();
+        if (team1.moves !== team2.moves || (team1.score < this.scoreToWin && team2.score < this.scoreToWin)) {
+            this.switchTeam();
             return;
         }
 
         if (team1.score === team2.score) {
-            self.switchTeam();
-            self.setText('game-status', 'Дополнительный ход');
-            //document.getElementById('game-status').textContent = 'Дополнительный ход';
+            this.switchTeam();
+            this.setText('game-status', 'Дополнительный ход');
+    
             return;
         }
 
-        self.setText('game-status', 'Победа');
-        //document.getElementById('game-status').textContent = 'Победа';
-        self.setText('game-current-team-name', team1.score > team2.score
+        this.setText('game-status', 'Победа');
+        this.setText('game-current-team-name', team1.score > team2.score
             ? team1.name
             : team2.name
         );
-        /*document.getElementById('game-current-team-name').textContent = team1.score > team2.score
-            ? team1.name
-            : team2.name;*/
-        document.getElementById('game-button-start-move').setAttribute('style', 'display: none;');
-        document.getElementById('game-button-new-game').setAttribute('style', 'display: block;');
+        this.addClass('game-button-start-move', 'hidden');
+        this.removeClass('game-button-new-game', 'hidden');
     }
 }

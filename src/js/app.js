@@ -1,13 +1,16 @@
 import { Base } from './base.js';
 import { Game } from './game.js';
 
+const MOVE_DURATION = 30;
+const SCORE_TO_WIN = 10;
+
 export class Catalias extends Base {
     constructor() {
         super();
 
-        this.elementId = 'settingsContainer';
+        this.elementId = 'settings-container';
         this.template = [
-            '<div id="settingsContainer">',
+            `<div id="${this.elementId}">`,
                 '<fieldset>',
                     '<legend>Команды</legend>',
                     '<div class="field-container team-name-container">',
@@ -27,17 +30,15 @@ export class Catalias extends Base {
                 '</fieldset>',
 
                 '<div class="button-container">',
-                    '<button id="startGameButton">Играть</button>',
+                    '<button id="button-start-game">Играть</button>',
                 '</div>',
             '</div>',
         ];
     }
 
     init() {
-        let self = this;
-
-        self.render();
-        self.addListener('startGameButton', 'click', 'startGame');
+        this.render();
+        this.addListener('button-start-game', 'click', 'startGame');
     }
 
     getTeamName(teamIndex) {
@@ -45,17 +46,15 @@ export class Catalias extends Base {
     }
 
     startGame() {
-        let self = this;
+        this.addClass(self.elementId, 'hidden');
 
-        self.addClass(self.elementId, 'hidden');
-
-        self.game = new Game(
-            self.getTeamName(1),
-            self.getTeamName(2),
+        this.game = new Game(
+            this.getTeamName(1),
+            this.getTeamName(2),
             {
-                moveDuration: 100,
-                scoreToWin: 10,
-                onGameEnd: self.onGameEnd.bind(self)
+                moveDuration: MOVE_DURATION,
+                scoreToWin: SCORE_TO_WIN,
+                onGameEnd: this.onGameEnd.bind(this)
             }
         ).start();
     }
