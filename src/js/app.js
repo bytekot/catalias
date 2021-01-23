@@ -1,5 +1,6 @@
 import { Base } from './base.js';
 import { Game } from './game.js';
+//import { settingsTemplate } from './settings.html';
 
 const MOVE_DURATION = 30;
 const SCORE_TO_WIN = 10;

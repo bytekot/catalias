@@ -98,7 +98,7 @@ export class Move extends Base {
      */
     getRandomWord() {
         return this.words[Math.floor(Math.random() * this.words.length)];
-    }  
+    }
 
     /**
      * Adds points to the move score; updates the total score view.
