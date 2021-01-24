@@ -30,7 +30,7 @@ class View {
         document.getElementById(elementId).classList.remove(className);
     }
 
-    getFieldValue(elementId: string) {
+    getFieldValue(elementId: string): string {
         return (<HTMLInputElement>document.getElementById(elementId)).value;
     }
 
@@ -48,7 +48,7 @@ class View {
         };
     }
 
-    getTeamName(teamIndex: number) {
+    getTeamName(teamIndex: number): string {
         return this.getFieldValue(`team${teamIndex}-namefield`);
     }
 

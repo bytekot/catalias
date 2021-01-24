@@ -6,18 +6,22 @@ export class Game {
     public readonly moveDuration: number;
     public readonly scoreToWin: number;
 
-    constructor(teams: readonly Team[], dictionary: Dictionary, options: { moveDuration: any; scoreToWin: any; }) {
+    constructor(
+        teams: readonly Team[],
+        dictionary: Dictionary,
+        options: { moveDuration: number; scoreToWin: number; }
+    ) {
         this.teams = teams;
         this.dictionary = dictionary;
         this.moveDuration = options.moveDuration;
         this.scoreToWin = options.scoreToWin;
     }
 
-    getCurrentRound() {
+    getCurrentRound(): number {
         return this.teams[0].moves;
     }
 
-    getCurrentTeam() {
+    getCurrentTeam(): Team {
         const currentRound = this.getCurrentRound();
 
         let currentTeam: Team;
@@ -33,7 +37,7 @@ export class Game {
         return (typeof currentTeam !== 'undefined') ? currentTeam : this.teams[0];
     }
 
-    isFinished() {
+    isFinished(): boolean {
         const currentRound = this.getCurrentRound();
 
         for (const team of this.teams) {
@@ -47,16 +51,16 @@ export class Game {
         }) && !this.isAdditionalRoundNeeded();
     }
 
-    isAdditionalRoundNeeded() {
-        const highScores = [];
+    isAdditionalRoundNeeded(): boolean {
+        const enoughPoints = [];
 
         for (const team of this.teams) {
             if (team.score >= this.scoreToWin) {
-                if (highScores.includes(team.score)) {
+                if (enoughPoints.includes(team.score)) {
                     return true;
                 }
 
-                highScores.push(team.score);
+                enoughPoints.push(team.score);
             }
         }
 
@@ -93,7 +97,7 @@ export class Dictionary {
      *
      * @returns {string}
      */
-    getRandomWord() {
+    getRandomWord(): string {
         const words = this.words;
         const randomWord = words[Math.floor(Math.random() * words.length)];
 
@@ -120,7 +124,7 @@ export class Move {
         this.currentMilliseconds = currentMilliseconds;
     }
 
-    isFinished() {
+    isFinished(): boolean {
         if (this.initialMilliseconds && this.currentMilliseconds) {
             return this.currentMilliseconds - this.initialMilliseconds >= this.moveDurationMilliseconds;
         }
