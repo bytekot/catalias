@@ -1,6 +1,11 @@
-import { Dictionary, Team, Game, Move } from './core.js';
+import { Dictionary, Team, Game, Move } from './core';
 
 class View {
+    game: Game;
+    moveDuration: number;
+    currentWord: string;
+    moveScore: number;
+
     onRender() {
         this.addListener('button-start-game', 'click', 'onStartGameButtonClick');
         this.addListener('button-start-move', 'click', 'onStartMoveButtonClick');
@@ -26,7 +31,7 @@ class View {
     }
 
     getFieldValue(elementId) {
-        return document.getElementById(elementId).value;
+        return (<HTMLInputElement>document.getElementById(elementId)).value;
     }
 
     getSettings() {

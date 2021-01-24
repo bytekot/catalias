@@ -1,5 +1,5 @@
-import './js/core.js';
-import './js/view.js';
+import './ts/core.ts';
+import './ts/view.ts';
 
 import './scss/base.scss';
 import './scss/button.scss';

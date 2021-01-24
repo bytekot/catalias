@@ -1,6 +1,11 @@
-import { getWords } from './dictionary.js';
+import { getWords } from './dictionary';
 
 export class Game {
+    public readonly teams: readonly Team[];
+    public readonly dictionary: Dictionary;
+    public readonly moveDuration: number;
+    public readonly scoreToWin: number;
+
     constructor(teams, dictionary, options) {
         this.teams = teams;
         this.dictionary = dictionary;
@@ -60,6 +65,10 @@ export class Game {
 }
 
 export class Team {
+    public readonly name: string;
+    public score: number;
+    public moves: number;
+
     constructor(name) {
         this.name = name;
         this.score = 0;
@@ -73,6 +82,8 @@ export class Team {
 }
 
 export class Dictionary {
+    public readonly words: string[];
+
     constructor() {
         this.words = getWords();
     }
@@ -93,6 +104,10 @@ export class Dictionary {
 }
 
 export class Move {
+    private readonly moveDurationMilliseconds: number;
+    private initialMilliseconds: number | undefined;
+    private currentMilliseconds: number | undefined;
+
     constructor(moveDurationMilliseconds) {
         this.moveDurationMilliseconds = moveDurationMilliseconds;
     }
