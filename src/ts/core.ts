@@ -6,7 +6,7 @@ export class Game {
     public readonly moveDuration: number;
     public readonly scoreToWin: number;
 
-    constructor(teams, dictionary, options) {
+    constructor(teams: readonly Team[], dictionary: Dictionary, options: { moveDuration: any; scoreToWin: any; }) {
         this.teams = teams;
         this.dictionary = dictionary;
         this.moveDuration = options.moveDuration;
@@ -20,7 +20,7 @@ export class Game {
     getCurrentTeam() {
         const currentRound = this.getCurrentRound();
 
-        let currentTeam;
+        let currentTeam: Team;
 
         for (const team of this.teams) {
             if (team.moves < currentRound) {
@@ -69,13 +69,13 @@ export class Team {
     public score: number;
     public moves: number;
 
-    constructor(name) {
+    constructor(name: string) {
         this.name = name;
         this.score = 0;
         this.moves = 0;
     }
 
-    tickMove(score) {
+    tickMove(score: number) {
         this.moves++;
         this.score = this.score + score;
     }
@@ -108,21 +108,21 @@ export class Move {
     private initialMilliseconds: number | undefined;
     private currentMilliseconds: number | undefined;
 
-    constructor(moveDurationMilliseconds) {
+    constructor(moveDurationMilliseconds: number) {
         this.moveDurationMilliseconds = moveDurationMilliseconds;
     }
 
-    start(initialMilliseconds) {
+    start(initialMilliseconds: number) {
         this.initialMilliseconds = initialMilliseconds;
     }
 
-    tick(currentMilliseconds) {
+    tick(currentMilliseconds: number) {
         this.currentMilliseconds = currentMilliseconds;
     }
 
     isFinished() {
         if (this.initialMilliseconds && this.currentMilliseconds) {
-            return this.currentMilliseconds - this.initialMilliseconds > this.moveDurationMilliseconds;
+            return this.currentMilliseconds - this.initialMilliseconds >= this.moveDurationMilliseconds;
         }
 
         return false;

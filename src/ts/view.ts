@@ -14,23 +14,23 @@ class View {
         this.addListener('button-new-game', 'click', 'onNewGameButtonClick');
     }
 
-    addListener(elementId, eventName, listener) {
+    addListener(elementId: string, eventName: string, listener: string) {
         document.getElementById(elementId).addEventListener(eventName, this[listener].bind(this), false);
     }
 
-    setText(elementId, text) {
-        document.getElementById(elementId).textContent = text;
+    setText(elementId: string, text: string | number) {
+        document.getElementById(elementId).textContent = text.toString();
     }
 
-    addClass(elementId, className) {
+    addClass(elementId: string, className: string) {
         document.getElementById(elementId).classList.add(className);
     }
 
-    removeClass(elementId, className) {
+    removeClass(elementId: string, className: string) {
         document.getElementById(elementId).classList.remove(className);
     }
 
-    getFieldValue(elementId) {
+    getFieldValue(elementId: string) {
         return (<HTMLInputElement>document.getElementById(elementId)).value;
     }
 
@@ -48,7 +48,7 @@ class View {
         };
     }
 
-    getTeamName(teamIndex) {
+    getTeamName(teamIndex: number) {
         return this.getFieldValue(`team${teamIndex}-namefield`);
     }
 
@@ -68,8 +68,8 @@ class View {
 
     onStartMoveButtonClick() {
         this.moveDuration = this.game.moveDuration;
-        this.currentWord = this.game.dictionary.getRandomWord(); // is it not a game state ?
-        this.moveScore = 0; // in view ?
+        this.currentWord = this.game.dictionary.getRandomWord(); // is it not a game/move state ?
+        this.moveScore = 0; // is it not a move state ?
 
         this.setText('move-score', this.moveScore);
         this.setText('current-word', this.currentWord);
