@@ -1,4 +1,4 @@
-import { getWords } from './words.js';
+import { getWords } from './dictionary.js';
 
 export class Game {
     constructor(teams, dictionary, options) {

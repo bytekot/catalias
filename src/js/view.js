@@ -26,7 +26,7 @@ class View {
     }
 
     getFieldValue(elementId) {
-        return document.getElementById(elementId).getAttribute('value');
+        return document.getElementById(elementId).value;
     }
 
     getSettings() {
@@ -37,8 +37,8 @@ class View {
             ],
             dictionary: new Dictionary(),
             options: {
-                moveDuration: 10,
-                scoreToWin: 10
+                moveDuration: parseInt(this.getFieldValue('settings-move-duration')),
+                scoreToWin: parseInt(this.getFieldValue('settings-score-to-win'))
             }
         };
     }

@@ -17,17 +17,30 @@
                     <input id="team1-namefield" class="textfield" placeholder="Название команды 1" value="Бешеные псы"
                         autofocus> VS
                 </div>
-
                 <div class="field-container team-name-container">
                     <input id="team2-namefield" class="textfield" placeholder="Название команды 2"
                         value="Бесславные ублюдки">
                 </div>
+                <!--
+                <button id="button">+</button>
+                -->
             </fieldset>
             <fieldset>
                 <legend>Наборы слов</legend>
                 <div class="field-container">
                     <input type="checkbox" checked disabled>
                     <label>Базовый набор</label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Настройки</legend>
+                <div class="field-container">
+                    <label>Продолжительность хода (сек.)</label>
+                    <input id="settings-move-duration" class="textfield" value="30">
+                </div>
+                <div class="field-container">
+                    <label>Очков для победы</label>
+                    <input id="settings-score-to-win" class="textfield" value="10">
                 </div>
             </fieldset>
 
