@@ -14,6 +14,12 @@ module.exports = {
             {
                 test: /\.ts?$/,
                 loader: 'ts-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.jsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/
             },
             {
                 test: /\.s[ac]ss$/i,
