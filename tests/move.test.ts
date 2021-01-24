@@ -1,4 +1,4 @@
-import { Move } from '../src/ts/core';
+import { Move } from "../src/ts/core/Move";
 
 test('End move after waiting', () => {
     const moveDurationMilliseconds = 60000;

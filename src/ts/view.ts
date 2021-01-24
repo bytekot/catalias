@@ -1,4 +1,7 @@
-import { Dictionary, Team, Game, Move } from './core';
+import { Move } from "./core/Move";
+import { Dictionary } from "./core/Dictionary";
+import { Team } from "./core/Team";
+import { Game } from "./core/Game";
 
 class View {
     private game: Game;

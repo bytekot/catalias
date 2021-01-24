@@ -1,4 +1,6 @@
-import { getWords } from './dictionary';
+import { Dictionary } from "./Dictionary";
+import { Team } from "./Team";
+
 
 export class Game {
     public readonly teams: readonly Team[];
@@ -62,71 +64,6 @@ export class Game {
 
                 enoughPoints.push(team.score);
             }
-        }
-
-        return false;
-    }
-}
-
-export class Team {
-    public readonly name: string;
-    public score: number;
-    public moves: number;
-
-    constructor(name: string) {
-        this.name = name;
-        this.score = 0;
-        this.moves = 0;
-    }
-
-    tickMove(score: number) {
-        this.moves++;
-        this.score = this.score + score;
-    }
-}
-
-export class Dictionary {
-    public readonly words: string[];
-
-    constructor() {
-        this.words = getWords();
-    }
-
-    /**
-     * Returns a random word and excludes it from the dictionary.
-     *
-     * @returns {string}
-     */
-    getRandomWord(): string {
-        const words = this.words;
-        const randomWord = words[Math.floor(Math.random() * words.length)];
-
-        words.splice(words.indexOf(randomWord), 1);
-
-        return randomWord;
-    }
-}
-
-export class Move {
-    private readonly moveDurationMilliseconds: number;
-    private initialMilliseconds: number | undefined;
-    private currentMilliseconds: number | undefined;
-
-    constructor(moveDurationMilliseconds: number) {
-        this.moveDurationMilliseconds = moveDurationMilliseconds;
-    }
-
-    start(initialMilliseconds: number) {
-        this.initialMilliseconds = initialMilliseconds;
-    }
-
-    tick(currentMilliseconds: number) {
-        this.currentMilliseconds = currentMilliseconds;
-    }
-
-    isFinished(): boolean {
-        if (this.initialMilliseconds && this.currentMilliseconds) {
-            return this.currentMilliseconds - this.initialMilliseconds >= this.moveDurationMilliseconds;
         }
 
         return false;
