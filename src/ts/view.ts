@@ -1,10 +1,10 @@
 import { Dictionary, Team, Game, Move } from './core';
 
 class View {
-    game: Game;
-    moveDuration: number;
-    currentWord: string;
-    moveScore: number;
+    private game: Game;
+    private moveDuration: number;
+    private moveScore: number;
+    private currentWord: string;
 
     onRender() {
         this.addListener('button-start-game', 'click', 'onStartGameButtonClick');
@@ -68,7 +68,7 @@ class View {
 
     onStartMoveButtonClick() {
         this.moveDuration = this.game.moveDuration;
-        this.currentWord = this.game.dictionary.getRandomWord();
+        this.currentWord = this.game.dictionary.getRandomWord(); // is it not a game state ?
         this.moveScore = 0; // in view ?
 
         this.setText('move-score', this.moveScore);
