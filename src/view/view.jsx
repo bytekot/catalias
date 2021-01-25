@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-class SettingsView extends Component {
+class SettingsForm extends Component {
     render() {
         return (
             <div id="settings-container">
@@ -43,3 +44,7 @@ class SettingsView extends Component {
         );
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => 
+    ReactDOM.render(<SettingsForm />, document.getElementById('root'))
+);

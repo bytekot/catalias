@@ -139,4 +139,4 @@ class View {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => new View().onRender());
+//document.addEventListener("DOMContentLoaded", () => new View().onRender());
