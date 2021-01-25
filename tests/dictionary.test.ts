@@ -1,4 +1,4 @@
-import { Dictionary } from "../src/ts/core/Dictionary";
+import { Dictionary } from "../src/core/Dictionary";
 
 test('Extract and remove a word from a dictionary', () => {
     const dictionary = new Dictionary();

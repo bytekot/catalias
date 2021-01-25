@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     entry: './src/main.ts',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js'
     },
     resolve: {
@@ -12,7 +12,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.ts?$/,
+                test: /\.tsw?$/,
                 loader: 'ts-loader',
                 exclude: /node_modules/
             },

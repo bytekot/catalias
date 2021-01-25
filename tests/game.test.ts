@@ -1,6 +1,6 @@
-import { Dictionary } from "../src/ts/core/Dictionary";
-import { Team } from "../src/ts/core/Team";
-import { Game } from "../src/ts/core/Game";
+import { Dictionary } from "../src/core/Dictionary";
+import { Team } from "../src/core/Team";
+import { Game } from "../src/core/Game";
 
 const team1 = new Team('Team 1');
 const team2 = new Team('Team 2');
