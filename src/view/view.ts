@@ -1,7 +1,7 @@
-import { Move } from "../core/Move";
-import { Dictionary } from "../core/Dictionary";
-import { Team } from "../core/Team";
-import { Game } from "../core/Game";
+import { Move } from '../core/Move';
+import { Team } from '../core/Team';
+import { Game } from '../core/Game';
+import { Dictionary } from '../core/Dictionary';
 
 class View {
     private game: Game;

@@ -25,6 +25,6 @@ const WORDS = [
  * Returns a clone of the word list.
  * @returns {array}
  */
-export function getWords(): Array<any> {
+export function getWords(): Array<string> {
     return [...WORDS];
 }
