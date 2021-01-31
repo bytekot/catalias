@@ -1,13 +1,28 @@
 import React from 'react';
 
 export default class MoveForm extends React.Component {
-    constructor({ duration, getWord }) {
+    constructor({ duration, getWord, move }) {
         super();
+
         this.state = {
             score: 0,
             duration: duration,
             currentWord: getWord()
         };
+
+        move.start(Date.now());
+
+        const intervalId = setInterval(() => {
+            move.tick(Date.now());
+            
+            this.setState(prevState => {
+                return { duration: prevState.duration - 1 };
+            });
+
+            if (move.isFinished()) {
+                clearInterval(intervalId);
+            }
+        }, 1000);
     }
 
     onButtonNextClick = () => {

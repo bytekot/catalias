@@ -17,21 +17,11 @@ class App extends React.Component {
         ReactDOM.render(
             <MoveForm
                 duration={game.moveDuration}
-                //currentWord={game.dictionary.getRandomWord()}
                 getWord={game.dictionary.getRandomWord.bind(game.dictionary)}
+                move={move}
             />,
             document.getElementById('root')
         );
-
-        move.start(Date.now());
-
-        const intervalId = setInterval(() => {
-            move.tick(Date.now());
-    
-            if (move.isFinished()) {
-                clearInterval(intervalId);
-            }
-        }, 1000);
     }
 
     onNewGameButtonClick = ({ teamNames, moveDuration, scoreToWin }) => {
