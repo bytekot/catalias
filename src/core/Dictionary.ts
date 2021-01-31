@@ -1,10 +1,10 @@
-import { getWords } from "../dictionary";
+import dictionary from '../dictionary.json';
 
 export class Dictionary {
     public readonly words: string[];
 
     constructor() {
-        this.words = getWords();
+        this.words = dictionary.basic;
     }
 
     /**
