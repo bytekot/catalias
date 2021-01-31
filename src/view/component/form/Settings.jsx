@@ -1,15 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import TextField from '../field/Text.jsx';
 import CheckboxField from '../field/Checkbox.jsx';
-import GameForm from './Game.jsx';
 
-class SettingsForm extends React.Component {
+export default class SettingsForm extends React.Component {
     state = {
-        teamName1: '',
-        teamName2: '',
-        moveDuration: 0,
-        scoreToWin: 0
+        teamName1: 'Бешеные псы',
+        teamName2: 'Бесславные ублюдки',
+        moveDuration: 60,
+        scoreToWin: 30
     };
 
     updateState = event => {
@@ -18,16 +16,14 @@ class SettingsForm extends React.Component {
         });
     }
 
-    onButtonClick = event => {
+    onNewGameButtonClick = event => {
         const state = this.state;
 
-        ReactDOM.render(
-            <GameForm
-                teamNames={[state.teamName1, state.teamName2]}
-                scoreToWin={state.scoreToWin}
-            />,
-            document.getElementById('root')
-        );
+        this.props.onButtonClick({
+            teamNames: [state.teamName1, state.teamName2],
+            moveDuration: state.moveDuration,
+            scoreToWin: state.scoreToWin
+        });
     }
 
     render() {
@@ -38,11 +34,13 @@ class SettingsForm extends React.Component {
                     <TextField
                         name="teamName1"
                         label="Команда 1"
+                        defaultValue={this.state.teamName1}
                         onBlur={this.updateState}
                     />
                     <TextField
                         name="teamName2"
                         label="Команда 2"
+                        defaultValue={this.state.teamName2}
                         onBlur={this.updateState}
                     />
                 </fieldset>
@@ -60,21 +58,21 @@ class SettingsForm extends React.Component {
                     <TextField
                         name="moveDuration"
                         label="Продолжительность хода (сек.)"
+                        defaultValue={this.state.moveDuration}
                         onBlur={this.updateState}
                     />
                     <TextField
                         name="scoreToWin"
                         label="Очков для победы"
+                        defaultValue={this.state.scoreToWin}
                         onBlur={this.updateState}
                     />
                 </fieldset>
 
                 <div className="button-container">
-                    <button name="button-start-game" onClick={this.onButtonClick}>Играть</button>
+                    <button name="button-start-game" onClick={this.onNewGameButtonClick}>Играть</button>
                 </div>
             </div>
         );
     }
 }
-
-export default SettingsForm;

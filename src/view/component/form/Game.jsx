@@ -1,12 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import DisplayField from '../field/Display.jsx';
-import MoveForm from './Move.jsx';
 
-class GameForm extends React.Component {
+export default class GameForm extends React.Component {
     props = {
         teamNames: [],
-        scoreToWin: 0
+        scoreToWin: 0,
+        moveDuration: 0
     };
 
     getTeamScoreFields = () => (
@@ -19,14 +18,8 @@ class GameForm extends React.Component {
         )
     )
 
-    onButtonClick = event => {
-        const state = this.state;
-
-        ReactDOM.render(
-            <MoveForm
-            />,
-            document.getElementById('root')
-        );
+    onNewMoveButtonClick = event => {
+        this.props.onButtonClick({});
     }
 
     render() {
@@ -45,12 +38,10 @@ class GameForm extends React.Component {
                 </div>
 
                 <div class="button-container">
-                    <button id="button-start-move" onClick={this.onButtonClick}>Начать ход</button>
+                    <button id="button-start-move" onClick={this.onNewMoveButtonClick}>Начать ход</button>
                     <button id="button-new-game" class="hidden">Новая игра</button>
                 </div>
             </div>
         )
     }
 }
-
-export default GameForm;
