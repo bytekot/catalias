@@ -1,18 +1,22 @@
 import React from 'react';
 import TextField from '../field/Text.jsx';
 import CheckboxField from '../field/Checkbox.jsx';
+import { dictionaryTypes } from '../../../core/Dictionary';
 
 export default class SettingsForm extends React.Component {
     state = {
         teamNames: ['Бешеные псы', 'Бесславные ублюдки'],
+        dictionaries: ['Базовый набор'],
         teamsNumber: 2,
         moveDuration: 60,
         scoreToWin: 30
     };
 
     updateState = event => {
+        const target = event.target;
+
         this.setState({
-            [event.target.name]: event.target.value
+            [target.name]: target.type !== 'checkbox' ? target.value : target.checked
         });
     }
 
@@ -25,7 +29,9 @@ export default class SettingsForm extends React.Component {
                     teamsNumber={this.state.teamsNumber}
                     teamNames={this.state.teamNames}
                 />
-                <Dictionaries />
+                <Dictionaries
+                    dictionaries={this.state.dictionaries}
+                />
                 <Settings
                     moveDuration={this.state.moveDuration}
                     scoreToWin={this.state.scoreToWin}
@@ -66,9 +72,7 @@ class Teams extends React.Component {
                         />
                     )
                 }
-                <div className="button-container">
                 <button onClick={this.addTeam}>Добавить</button>
-                </div>
             </fieldset>
         )
     }
@@ -82,15 +86,37 @@ const TeamNameField = ({ teamId, ...rest }) => (
     />
 );
 
-const Dictionaries = () => (
-    <fieldset>
-        <legend>Наборы слов</legend>
-        <CheckboxField
-            name="words"
-            label="Базовый набор"
-        />
-    </fieldset>
-);
+class Dictionaries extends React.Component {
+    updateHandler = event => {
+        const dictionaries = this.props.dictionaries;
+
+        if (event.target.checked && !dictionaries.includes(event.target.name)) {
+            dictionaries.push(event.target.name);
+        }
+
+        if (!event.target.checked && dictionaries.includes(event.target.name)) {
+            dictionaries.splice(dictionaries.indexOf(event.target.name), 1);
+        }
+    }
+
+    render() {
+        return (
+            <fieldset>
+                <legend>Наборы слов</legend>
+                {
+                    dictionaryTypes.map(type =>
+                        <CheckboxField
+                            name={type}
+                            label={type}
+                            onBlur={this.updateHandler}
+                            defaultChecked={this.props.dictionaries.includes(type)}
+                        />
+                    )
+                }
+            </fieldset>
+        );
+    }
+};
 
 const Settings = ({ moveDuration, scoreToWin, updateHandler }) => (
     <fieldset>

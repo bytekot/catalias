@@ -1,10 +1,16 @@
 import dictionary from '../dictionary.json';
 
+export const dictionaryTypes = Object.keys(dictionary);
+
 export class Dictionary {
     public readonly words: string[];
 
-    constructor() {
-        this.words = dictionary.basic;
+    constructor(types = []) {
+        this.words = [];
+
+        for (const type of types) {
+            this.words = this.words.concat(dictionary[type]);
+        }
     }
 
     /**
