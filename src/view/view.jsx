@@ -12,6 +12,17 @@ class App extends React.Component {
 
     state = {};
 
+    onMoveEnd = () => {
+        const state = this.state;
+        const currentTeam = state.game.getCurrentTeam();
+
+        currentTeam.tickMove(state.move.score);
+
+        this.setState({
+            move: undefined
+        });
+    }
+
     onNewMoveButtonClick = () => {
         this.setState({
             move: new Move(this.state.game.moveDuration * 1000)
@@ -43,6 +54,7 @@ class App extends React.Component {
                     duration={state.moveDuration}
                     getWord={state.game.dictionary.getRandomWord.bind(state.game.dictionary)}
                     move={state.move}
+                    onFinish={this.onMoveEnd}
                 />
             )
         }

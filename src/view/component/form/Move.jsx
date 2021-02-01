@@ -21,6 +21,7 @@ export default class MoveForm extends React.Component {
 
             if (move.isFinished()) {
                 clearInterval(intervalId);
+                this.props.onFinish();
             }
         }, 1000);
     }
