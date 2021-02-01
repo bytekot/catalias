@@ -46,7 +46,10 @@ export default class MoveForm extends React.Component {
             return;
         }
 
-        // Pause to briefly show the updated move score
+        /**
+         * Pause to briefly show the updated move score.
+         * Note: it is necessary to make a general timeout for all button click handlers.
+         */
         setTimeout(() => {
             this.props.onFinish(this.state.score);
         }, 100);
