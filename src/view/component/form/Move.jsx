@@ -21,7 +21,7 @@ export default class MoveForm extends React.Component {
 
             if (move.isFinished()) {
                 clearInterval(intervalId);
-                this.props.onFinish();
+                this.props.onFinish(this.state.score);
             }
         }, 1000);
     }
@@ -41,28 +41,28 @@ export default class MoveForm extends React.Component {
 
     render() {
         return (
-            <div name="moveForm" id="move-container">
+            <div className="move-container">
                 <div class="progress-bar">
                     <span class="bar">
                         <span class="progress"></span>
                     </span>
                 </div>
-                <div id="move-timer">{this.state.duration}</div>
-                <div id="move-score-container">
+                <div className="move-timer">{this.state.duration}</div>
+                <div className="move-score-container">
                     <label>Очки: </label>
-                    <span id="move-score">{this.state.score}</span>
+                    <span>{this.state.score}</span>
                 </div>
                 <div class="move-card-container">
                     <div class="card">
-                        <span id="current-word">{this.state.currentWord}</span>
+                        <span>{this.state.currentWord}</span>
                     </div>
                     <div class="card"></div>
                     <div class="card"></div>
                 </div>
 
-                <div id="move-buttons-container">
-                    <button name="buttonSkip" onClick={this.setNewWord}>Пропустить слово</button>
-                    <button name="buttonNext" onClick={this.onButtonNextClick}>Засчитать слово</button>
+                <div className="move-buttons-container">
+                    <button onClick={this.setNewWord}>Пропустить слово</button>
+                    <button onClick={this.onButtonNextClick}>Засчитать слово</button>
                 </div>
             </div>
         )

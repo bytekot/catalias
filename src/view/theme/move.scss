@@ -1,6 +1,6 @@
 @import "button.scss";
 
-#move-container {
+.move-container {
     .progress-bar {
         border-radius: 60px;
         overflow: hidden;
@@ -58,20 +58,16 @@
         }
     }
 
-    #move-score-container,
-    #move-buttons-container,
-    #move-timer,
-    #move-word {
+    .move-score-container,
+    .move-buttons-container,
+    .move-timer,
+    .move-word {
         text-align: center;
     }
 
-    #move-timer {
+    .move-timer {
         font-size: xx-large;
         padding: 10px 0 20px 0;
-    }
-
-    #move-word {
-        font-size: large;
     }
 }
 

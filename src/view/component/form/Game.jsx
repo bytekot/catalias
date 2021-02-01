@@ -2,18 +2,20 @@ import React from 'react';
 import DisplayField from '../field/Display.jsx';
 
 export default class GameForm extends React.Component {
-    props = {
-        teamNames: [],
-        scoreToWin: 0,
-        moveDuration: 0
-    };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            game: props.game
+        };
+    }
 
     getTeamScoreFields = () => (
         this.props.teamNames.map((teamName, index) =>
             <DisplayField
-                name="game-team-name"
                 label={teamName}
-                value={0}
+                value={this.state.game.teams[index].score}
             />
         )
     )
@@ -24,22 +26,29 @@ export default class GameForm extends React.Component {
 
     render() {
         return (
-            <div id="game-container">
+            <div>
                 { this.getTeamScoreFields()}
                 <DisplayField
-                    name="game-score-to-win"
                     label="Очки для победы"
                     value={this.props.scoreToWin}
                 />
 
                 <div class="title">
-                    <span id="game-status">Ход команды </span>
-                    <span id="current-team-name">"{this.props.teamNames[0]}"</span>
+                    <span>Ход команды </span>
+                    <span>"{this.state.game.getCurrentTeam().name}"</span>
                 </div>
 
                 <div class="button-container">
-                    <button id="button-start-move" onClick={this.onNewMoveButtonClick}>Начать ход</button>
-                    <button id="button-new-game" class="hidden">Новая игра</button>
+                    <button 
+                        class={this.state.game.isFinished() ? "hidden" : ""}
+                        onClick={this.onNewMoveButtonClick}
+                    >Начать ход
+                    </button>
+                    <button
+                        class={!this.state.game.isFinished() ? "hidden" : ""}
+                        onClick={this.props.onFinish}
+                    >Новая игра
+                    </button>
                 </div>
             </div>
         )

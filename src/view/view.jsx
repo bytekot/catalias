@@ -12,14 +12,20 @@ class App extends React.Component {
 
     state = {};
 
-    onMoveEnd = () => {
+    onMoveEnd = (score) => {
         const state = this.state;
         const currentTeam = state.game.getCurrentTeam();
 
-        currentTeam.tickMove(state.move.score);
+        currentTeam.tickMove(score);
 
         this.setState({
             move: undefined
+        });
+    }
+
+    onGameEnd = () => {
+        this.setState({
+            game: undefined
         });
     }
 
@@ -66,7 +72,8 @@ class App extends React.Component {
                     teamNames={state.teamNames}
                     scoreToWin={state.scoreToWin}
                     onButtonClick={this.onNewMoveButtonClick}
-                    hidden={state.hidden1}
+                    game={state.game}
+                    onFinish={this.onGameEnd}
                 />
         );
     }
