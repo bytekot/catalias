@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default class MoveForm extends React.Component {
 
@@ -26,7 +26,6 @@ export default class MoveForm extends React.Component {
 
             if (move.isFinished()) {
                 clearInterval(intervalId);
-                this.props.onFinish(this.state.score);
             }
         }, 1000);
     }
@@ -39,9 +38,19 @@ export default class MoveForm extends React.Component {
     }
 
     setNewWord = () => {
-        this.setState({
-            currentWord: this.props.getWord()
-        });
+        if (!this.props.move.isFinished()) {
+            this.setState({
+                currentWord: this.props.getWord()
+            });
+
+            return;
+        }
+
+        // Pause to briefly show the updated move score
+        setTimeout(() => {
+            this.props.onFinish(this.state.score);
+        }, 100);
+        
     }
 
     render() {
