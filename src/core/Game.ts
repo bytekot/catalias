@@ -68,4 +68,10 @@ export class Game {
 
         return false;
     }
+
+    getWinnerName(): string | null {
+        const team = this.teams.find(team => team.score >= this.scoreToWin);
+
+        return typeof team !== 'undefined' ? team.name : null;
+    }
 }

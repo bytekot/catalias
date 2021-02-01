@@ -16,30 +16,30 @@ export default class GameForm extends React.Component {
     }
 
     render() {
+        const game = this.state.game;
+        const finished = game.isFinished();
+
         return (
             <div>
-                <TeamNames teams={this.state.game.teams} />
-
+                <TeamNames teams={game.teams} />
                 <DisplayField
                     label="Очки для победы"
                     value={this.props.scoreToWin}
                 />
-
-                <div class="title">
-                    <span>Ход команды </span>
-                    <span>"{this.state.game.getCurrentTeam().name}"</span>
-                </div>
-
+                <Status 
+                    finished={finished}
+                    teamName={!finished ? game.getCurrentTeam().name : game.getWinnerName()}
+                />
                 <div class="button-container">
                     <button 
-                        class={this.state.game.isFinished() ? "hidden" : ""}
+                        class={finished ? "hidden" : ""}
                         onClick={this.onNewMoveButtonClick}
-                    >Начать ход
+                    >   Начать ход
                     </button>
                     <button
-                        class={!this.state.game.isFinished() ? "hidden" : ""}
+                        class={!finished ? "hidden" : ""}
                         onClick={this.props.onFinish}
-                    >Новая игра
+                    >   Новая игра
                     </button>
                 </div>
             </div>
@@ -54,4 +54,11 @@ const TeamNames = ({ teams }) => (
             value={team.score}
         />
     )
+);
+
+const Status = ({ finished, teamName }) => (
+    <div class="title">
+        <span>{!finished ? "Ход" : "Победа"} команды </span>
+        <span>"{teamName}"</span>
+    </div>
 );
