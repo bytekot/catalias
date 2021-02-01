@@ -2,52 +2,6 @@ import React from 'react';
 import TextField from '../field/Text.jsx';
 import CheckboxField from '../field/Checkbox.jsx';
 
-const TeamSet = ({ teamName1, teamName2, updateHandler }) => (
-    <fieldset>
-        <legend>Команды</legend>
-        <TextField
-            name="teamName1"
-            label="Команда 1"
-            defaultValue={teamName1}
-            onBlur={updateHandler}
-        />
-        <TextField
-            name="teamName2"
-            label="Команда 2"
-            defaultValue={teamName2}
-            onBlur={updateHandler}
-        />
-    </fieldset>
-);
-
-const DictionarySet = () => (
-    <fieldset>
-        <legend>Наборы слов</legend>
-        <CheckboxField
-            name="words"
-            label="Базовый набор"
-        />
-    </fieldset>
-);
-
-const SettingSet = ({ moveDuration, scoreToWin, updateHandler }) => (
-    <fieldset>
-        <legend>Настройки</legend>
-        <TextField
-            name="moveDuration"
-            label="Продолжительность хода (сек.)"
-            defaultValue={moveDuration}
-            onBlur={updateHandler}
-        />
-        <TextField
-            name="scoreToWin"
-            label="Очков для победы"
-            defaultValue={scoreToWin}
-            onBlur={updateHandler}
-        />
-    </fieldset>
-);
-
 export default class SettingsForm extends React.Component {
     state = {
         teamName1: 'Бешеные псы',
@@ -94,3 +48,49 @@ export default class SettingsForm extends React.Component {
         );
     }
 }
+
+const TeamSet = ({ teamName1, teamName2, updateHandler }) => (
+    <fieldset>
+        <legend>Команды</legend>
+        <TextField
+            name="teamName1"
+            label="Команда 1"
+            defaultValue={teamName1}
+            onBlur={updateHandler}
+        />
+        <TextField
+            name="teamName2"
+            label="Команда 2"
+            defaultValue={teamName2}
+            onBlur={updateHandler}
+        />
+    </fieldset>
+);
+
+const DictionarySet = () => (
+    <fieldset>
+        <legend>Наборы слов</legend>
+        <CheckboxField
+            name="words"
+            label="Базовый набор"
+        />
+    </fieldset>
+);
+
+const SettingSet = ({ moveDuration, scoreToWin, updateHandler }) => (
+    <fieldset>
+        <legend>Настройки</legend>
+        <TextField
+            name="moveDuration"
+            label="Продолжительность хода (сек.)"
+            defaultValue={moveDuration}
+            onBlur={updateHandler}
+        />
+        <TextField
+            name="scoreToWin"
+            label="Очков для победы"
+            defaultValue={scoreToWin}
+            onBlur={updateHandler}
+        />
+    </fieldset>
+);

@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default class MoveForm extends React.Component {
+
     constructor({ duration, getWord, move }) {
         super();
 
@@ -9,12 +10,15 @@ export default class MoveForm extends React.Component {
             duration: duration,
             currentWord: getWord()
         };
+    }
 
+    componentDidMount = () => {
+        const move = this.props.move;
         move.start(Date.now());
 
         const intervalId = setInterval(() => {
             move.tick(Date.now());
-            
+
             this.setState(prevState => {
                 return { duration: prevState.duration - 1 };
             });
@@ -42,24 +46,9 @@ export default class MoveForm extends React.Component {
     render() {
         return (
             <div className="move-container">
-                <div class="progress-bar">
-                    <span class="bar">
-                        <span class="progress"></span>
-                    </span>
-                </div>
-                <div className="move-timer">{this.state.duration}</div>
-                <div className="move-score-container">
-                    <label>Очки: </label>
-                    <span>{this.state.score}</span>
-                </div>
-                <div class="move-card-container">
-                    <div class="card">
-                        <span>{this.state.currentWord}</span>
-                    </div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                </div>
-
+                <ProgressBar timeLeft={this.state.duration} />
+                <Score score={this.state.score} />
+                <WordCard word={this.state.currentWord} />
                 <div className="move-buttons-container">
                     <button onClick={this.setNewWord}>Пропустить слово</button>
                     <button onClick={this.onButtonNextClick}>Засчитать слово</button>
@@ -68,3 +57,31 @@ export default class MoveForm extends React.Component {
         )
     }
 }
+
+const ProgressBar = ({ timeLeft }) => (
+    <div>
+        <div class="progress-bar">
+            <span class="bar">
+                <span class="progress"></span>
+            </span>
+        </div>
+        <div className="move-timer">{timeLeft}</div>
+    </div>
+);
+
+const WordCard = ({ word }) => (
+    <div class="move-card-container">
+        <div class="card">
+            <span>{word}</span>
+        </div>
+        <div class="card"></div>
+        <div class="card"></div>
+    </div>
+);
+
+const Score = ({ score }) => (
+    <div className="move-score-container">
+        <label>Очки: </label>
+        <span>{score}</span>
+    </div>
+);

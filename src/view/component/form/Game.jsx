@@ -11,15 +11,6 @@ export default class GameForm extends React.Component {
         };
     }
 
-    getTeamScoreFields = () => (
-        this.props.teamNames.map((teamName, index) =>
-            <DisplayField
-                label={teamName}
-                value={this.state.game.teams[index].score}
-            />
-        )
-    )
-
     onNewMoveButtonClick = event => {
         this.props.onButtonClick({});
     }
@@ -27,7 +18,8 @@ export default class GameForm extends React.Component {
     render() {
         return (
             <div>
-                { this.getTeamScoreFields()}
+                <TeamNames teams={this.state.game.teams} />
+
                 <DisplayField
                     label="Очки для победы"
                     value={this.props.scoreToWin}
@@ -54,3 +46,12 @@ export default class GameForm extends React.Component {
         )
     }
 }
+
+const TeamNames = ({ teams }) => (
+    teams.map(team =>
+        <DisplayField
+            label={team.name}
+            value={team.score}
+        />
+    )
+);
