@@ -4,8 +4,8 @@ import CheckboxField from '../field/Checkbox.jsx';
 
 export default class SettingsForm extends React.Component {
     state = {
-        teamName1: 'Бешеные псы',
-        teamName2: 'Бесславные ублюдки',
+        teamNames: ['Бешеные псы', 'Бесславные ублюдки'],
+        teamsNumber: 2,
         moveDuration: 60,
         scoreToWin: 30
     };
@@ -16,24 +16,14 @@ export default class SettingsForm extends React.Component {
         });
     }
 
-    // todo: team names
-    onNewGameButtonClick = event => {
-        const state = this.state;
-
-        this.props.onButtonClick({
-            teamNames: [state.teamName1, state.teamName2],
-            moveDuration: state.moveDuration,
-            scoreToWin: state.scoreToWin
-        });
-    }
+    onNewGameButtonClick = () => this.props.onButtonClick(this.state);
 
     render() {
         return (
             <div>
                 <Teams
-                    teamName1={this.state.teamName1}
-                    teamName2={this.state.teamName2}
-                    updateHandler={this.updateState}
+                    teamsNumber={this.state.teamsNumber}
+                    teamNames={this.state.teamNames}
                 />
                 <Dictionaries />
                 <Settings
@@ -42,29 +32,54 @@ export default class SettingsForm extends React.Component {
                     updateHandler={this.updateState}
                 />
                 <div className="button-container">
-                    <button name="button-start-game" onClick={this.onNewGameButtonClick}>Играть</button>
+                    <button onClick={this.onNewGameButtonClick}>Играть</button>
                 </div>
             </div>
         );
     }
 }
 
-const Teams = ({ teamName1, teamName2, updateHandler }) => (
-    <fieldset>
-        <legend>Команды</legend>
-        <TextField
-            name="teamName1"
-            label="Команда 1"
-            defaultValue={teamName1}
-            onBlur={updateHandler}
-        />
-        <TextField
-            name="teamName2"
-            label="Команда 2"
-            defaultValue={teamName2}
-            onBlur={updateHandler}
-        />
-    </fieldset>
+class Teams extends React.Component {
+    state = {
+        teamsNumber: this.props.teamsNumber
+    };
+
+    addTeam = () => {
+        this.setState(prevState => (
+            { teamsNumber: prevState.teamsNumber + 1 }
+        ));
+    }
+
+    updateHandler = event =>
+        this.props.teamNames[event.target.name] = event.target.value;
+
+    render() {
+        return (
+            <fieldset>
+                <legend>Команды</legend>
+                {
+                    Array.from({ length: this.state.teamsNumber }, (_value, index) =>
+                        <TeamNameField
+                            teamId={index}
+                            defaultValue={this.props.teamNames[index] || ''}
+                            onBlur={this.updateHandler}
+                        />
+                    )
+                }
+                <div className="button-container">
+                <button onClick={this.addTeam}>Добавить</button>
+                </div>
+            </fieldset>
+        )
+    }
+};
+
+const TeamNameField = ({ teamId, ...rest }) => (
+    <TextField
+        name={teamId}
+        label={`Команда ${teamId + 1}`}
+        {...rest}
+    />
 );
 
 const Dictionaries = () => (
