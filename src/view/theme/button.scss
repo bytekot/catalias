@@ -12,7 +12,7 @@ $angle-o: 4px;
 }
 
 button {
-  margin: 30px 10px 0 0;
+  margin: 25px 15px 0 15px;
   top: 0;
   left: 0;
   transition: all .15s linear 0s;
@@ -20,6 +20,7 @@ button {
   display: inline-block;
   padding: 15px 25px;
   background-color: $yellow;
+  border-radius: 4px;
   
   text-transform: uppercase;
   color: $brown;
@@ -94,7 +95,23 @@ button:active {
   }
 }
 
+button, button:visited, button:focus, button:active, button:hover{
+    outline: 0 none !important;
+}
+
 button.small {
-    padding: 3px 10px;
-    margin: 0 0 0 20px;
+    padding: 5px 10px;
+    margin: 0 0 0 18px;
+    font-size: x-small;
+    box-shadow: -4px 4px 0 $brown;
+
+    &:hover {
+        top: 2px;
+        left: -2px;
+        box-shadow: -2px 2px 0 $brown;
+    }
+
+    &:active {
+        box-shadow: none;
+    }
 }

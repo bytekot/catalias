@@ -62,7 +62,10 @@ class Teams extends React.Component {
     render() {
         return (
             <fieldset>
-                <legend>Команды</legend>
+                <legend>
+                    <span>Команды</span>
+                    <button className="small" onClick={this.addTeam}>Добавить</button>
+                </legend>
                 {
                     Array.from({ length: this.state.teamsNumber }, (_value, index) =>
                         <TeamNameField
@@ -72,7 +75,6 @@ class Teams extends React.Component {
                         />
                     )
                 }
-                <button onClick={this.addTeam}>Добавить</button>
             </fieldset>
         )
     }

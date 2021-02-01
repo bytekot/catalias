@@ -67,8 +67,8 @@ export default class MoveForm extends React.Component {
                 <Score score={this.state.score} />
                 <WordCard word={this.state.currentWord} />
                 <div className="move-buttons-container">
-                    <button onClick={this.setNewWord}>Пропустить слово</button>
-                    <button onClick={this.onButtonNextClick}>Засчитать слово</button>
+                    <button onClick={this.setNewWord}>&#10060; Пропустить слово</button>
+                    <button onClick={this.onButtonNextClick}>&#10004; Засчитать слово</button>
                 </div>
             </div>
         )
@@ -77,10 +77,10 @@ export default class MoveForm extends React.Component {
 
 const ProgressBar = ({ duration, timeLeft }) => (
     <div>
-        <div class="progress-bar">
-            <span class="bar">
+        <div className="progress-bar">
+            <span className="bar">
                 <span
-                    class="progress"
+                    className="progress"
                     style={{ "--progress-animation-duration": duration + "s" }}
                 />
             </span>
@@ -90,12 +90,12 @@ const ProgressBar = ({ duration, timeLeft }) => (
 );
 
 const WordCard = ({ word }) => (
-    <div class="move-card-container">
-        <div class="card">
-            <span>{word}</span>
+    <div className="move-card-container">
+        <div className="card">
+            <span className="move-word">{word}</span>
         </div>
-        <div class="card"></div>
-        <div class="card"></div>
+        <div className="card"></div>
+        <div className="card"></div>
     </div>
 );
 

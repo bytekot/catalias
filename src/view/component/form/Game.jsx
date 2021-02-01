@@ -58,7 +58,7 @@ const TeamNames = ({ teams }) => (
 
 const Status = ({ finished, teamName }) => (
     <div class="title">
-        <span>{!finished ? "Ход" : "Победа"} команды </span>
+        <span>{!finished ? "Ход" : "🏆 Победа"} команды </span>
         <span>"{teamName}"</span>
     </div>
 );
