@@ -8,6 +8,7 @@ export default class MoveForm extends React.Component {
         this.state = {
             score: 0,
             duration: duration,
+            timeLeft: duration,
             currentWord: getWord()
         };
     }
@@ -20,7 +21,7 @@ export default class MoveForm extends React.Component {
             move.tick(Date.now());
 
             this.setState(prevState => {
-                return { duration: prevState.duration - 1 };
+                return { timeLeft: prevState.timeLeft - 1 };
             });
 
             if (move.isFinished()) {
@@ -46,7 +47,10 @@ export default class MoveForm extends React.Component {
     render() {
         return (
             <div className="move-container">
-                <ProgressBar timeLeft={this.state.duration} />
+                <ProgressBar
+                    duration={this.state.duration}
+                    timeLeft={this.state.timeLeft}
+                />
                 <Score score={this.state.score} />
                 <WordCard word={this.state.currentWord} />
                 <div className="move-buttons-container">
@@ -58,11 +62,14 @@ export default class MoveForm extends React.Component {
     }
 }
 
-const ProgressBar = ({ timeLeft }) => (
+const ProgressBar = ({ duration, timeLeft }) => (
     <div>
         <div class="progress-bar">
             <span class="bar">
-                <span class="progress"></span>
+                <span
+                    class="progress"
+                    style={{ "--progress-animation-duration": duration + "s" }}
+                />
             </span>
         </div>
         <div className="move-timer">{timeLeft}</div>

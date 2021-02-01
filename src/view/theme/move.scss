@@ -14,7 +14,8 @@
             background: rgba(0,0,0,0.075);
 
             .progress {
-                animation: loader 60s linear forwards;
+                --progress-animation-duration: 60s;
+                animation: loader var(--progress-animation-duration) linear forwards;
                 background: #75b800;
                 color: #fff;
                 padding: 5px;
