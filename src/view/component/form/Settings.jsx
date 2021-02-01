@@ -30,13 +30,13 @@ export default class SettingsForm extends React.Component {
     render() {
         return (
             <div>
-                <TeamSet
+                <Teams
                     teamName1={this.state.teamName1}
                     teamName2={this.state.teamName2}
                     updateHandler={this.updateState}
                 />
-                <DictionarySet />
-                <SettingSet 
+                <Dictionaries />
+                <Settings
                     moveDuration={this.state.moveDuration}
                     scoreToWin={this.state.scoreToWin}
                     updateHandler={this.updateState}
@@ -49,7 +49,7 @@ export default class SettingsForm extends React.Component {
     }
 }
 
-const TeamSet = ({ teamName1, teamName2, updateHandler }) => (
+const Teams = ({ teamName1, teamName2, updateHandler }) => (
     <fieldset>
         <legend>Команды</legend>
         <TextField
@@ -67,7 +67,7 @@ const TeamSet = ({ teamName1, teamName2, updateHandler }) => (
     </fieldset>
 );
 
-const DictionarySet = () => (
+const Dictionaries = () => (
     <fieldset>
         <legend>Наборы слов</legend>
         <CheckboxField
@@ -77,7 +77,7 @@ const DictionarySet = () => (
     </fieldset>
 );
 
-const SettingSet = ({ moveDuration, scoreToWin, updateHandler }) => (
+const Settings = ({ moveDuration, scoreToWin, updateHandler }) => (
     <fieldset>
         <legend>Настройки</legend>
         <TextField

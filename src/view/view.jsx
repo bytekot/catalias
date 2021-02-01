@@ -13,9 +13,7 @@ class App extends React.Component {
     state = {};
 
     onMoveEnd = (score) => {
-        const state = this.state;
-        const currentTeam = state.game.getCurrentTeam();
-
+        const currentTeam = this.state.game.getCurrentTeam();
         currentTeam.tickMove(score);
 
         this.setState({

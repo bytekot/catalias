@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default class MoveForm extends React.Component {
 
@@ -17,6 +17,7 @@ export default class MoveForm extends React.Component {
         const move = this.props.move;
         move.start(Date.now());
 
+        // Note: needs to move this code to the progress bar
         const intervalId = setInterval(() => {
             move.tick(Date.now());
 
