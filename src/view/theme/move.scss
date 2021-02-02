@@ -17,7 +17,7 @@ $brown: #404040;
         }
 
         .bar {
-            background: #fff;/*rgba(0,0,0,0.075);*/
+            background: #fff;
 
             .progress {
                 --progress-animation-duration: 60s;
@@ -74,6 +74,7 @@ $brown: #404040;
 
     .move-word {
         font-size: x-large;
+        user-select: none;
     }
 
     .move-timer {

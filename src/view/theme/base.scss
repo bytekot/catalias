@@ -1,11 +1,17 @@
 $border-radius: 3px;
 $background-color: #1CD3F8;
 
+//@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap');
+
 body {
     margin: auto;
     padding: 15px;
     max-width: 600px;
-    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    //font-family: 'Poiret One', cursive;
+    font-family: 'Kelly Slab', cursive;
+    letter-spacing: 0.8px;
+    font-weight: 500;
     background-color: #F9F9F9;
 
     fieldset {
@@ -16,7 +22,8 @@ body {
         legend {
             padding: 0;
             font-size: large;
-            font-weight: 500;
+            font-weight: 700;
+            letter-spacing: 1.4px;
         }
 
         label {
