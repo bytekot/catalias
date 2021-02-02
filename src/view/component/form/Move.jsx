@@ -17,7 +17,6 @@ export default class MoveForm extends React.Component {
         const move = this.props.move;
         move.start(Date.now());
 
-        // Note: needs to move this code to the progress bar
         const intervalId = setInterval(() => {
             move.tick(Date.now());
 
@@ -47,10 +46,7 @@ export default class MoveForm extends React.Component {
             return;
         }
 
-        /**
-         * Pause to briefly show the updated move score.
-         * Note: it is necessary to make a general timeout for all button click handlers.
-         */
+        // Pause to briefly show the updated move score.
         setTimeout(() => {
             this.props.onFinish(this.state.score);
         }, 100);
