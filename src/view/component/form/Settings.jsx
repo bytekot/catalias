@@ -78,36 +78,37 @@ const TeamNameField = ({ teamId, ...rest }) => (
     />
 );
 
-class Dictionaries extends React.Component {
-    updateHandler = event => {
-        const dictionaries = this.props.dictionaries;
+const Dictionaries = ({ dictionaries }) => {
+    const onBlur = event => {
+        const name = event.target.name;
+        const checked = event.target.checked;
+        const included = dictionaries.includes(name);
 
-        if (event.target.checked && !dictionaries.includes(event.target.name)) {
-            dictionaries.push(event.target.name);
+        if (checked && !included) {
+            dictionaries.push(name);
+            return;
         }
 
-        if (!event.target.checked && dictionaries.includes(event.target.name)) {
-            dictionaries.splice(dictionaries.indexOf(event.target.name), 1);
+        if (!checked && included) {
+            dictionaries.filter(dictionary => dictionary !== name);
         }
-    }
+    };
 
-    render() {
-        return (
-            <fieldset>
-                <legend>Наборы слов</legend>
-                {
-                    dictionaryTypes.map(type =>
-                        <CheckboxField
-                            name={type}
-                            label={type}
-                            onBlur={this.updateHandler}
-                            defaultChecked={this.props.dictionaries.includes(type)}
-                        />
-                    )
-                }
-            </fieldset>
-        );
-    }
+    return (
+        <fieldset>
+            <legend>Наборы слов</legend>
+            {
+                dictionaryTypes.map(type =>
+                    <CheckboxField
+                        name={type}
+                        label={type}
+                        defaultChecked={dictionaries.includes(type)}
+                        onBlur={onBlur}
+                    />
+                )
+            }
+        </fieldset>
+    );
 };
 
 const Settings = ({ moveDuration, scoreToWin, updateHandler }) => (
