@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '../field/Text.jsx';
 import CheckboxField from '../field/Checkbox.jsx';
 import { dictionaryTypes } from '../../../core/Dictionary';
@@ -26,7 +26,6 @@ export default class SettingsForm extends React.Component {
         return (
             <div>
                 <Teams
-                    teamsNumber={this.state.teamsNumber}
                     teamNames={this.state.teamNames}
                 />
                 <Dictionaries
@@ -45,39 +44,30 @@ export default class SettingsForm extends React.Component {
     }
 }
 
-class Teams extends React.Component {
-    state = {
-        teamsNumber: this.props.teamsNumber
-    };
+const Teams = ({ teamNames }) => {
+    const [teamsNumber, setTeamsNumber] = useState(2);
 
-    addTeam = () => {
-        this.setState(prevState => (
-            { teamsNumber: prevState.teamsNumber + 1 }
-        ));
-    }
-
-    updateHandler = event =>
-        this.props.teamNames[event.target.name] = event.target.value;
-
-    render() {
-        return (
-            <fieldset>
-                <legend>
-                    <span>Команды</span>
-                    <button className="small" onClick={this.addTeam}>&#43; Добавить</button>
-                </legend>
-                {
-                    Array.from({ length: this.state.teamsNumber }, (_value, index) =>
-                        <TeamNameField
-                            teamId={index}
-                            defaultValue={this.props.teamNames[index] || ''}
-                            onBlur={this.updateHandler}
-                        />
-                    )
-                }
-            </fieldset>
-        )
-    }
+    return (
+        <fieldset>
+            <legend>
+                <span>Команды</span>
+                <button
+                    className="small"
+                    onClick={() => setTeamsNumber(teamsNumber + 1)}
+                >&#43; Добавить
+                </button>
+            </legend>
+            {
+                Array.from({ length: teamsNumber }, (_value, index) =>
+                    <TeamNameField
+                        teamId={index}
+                        defaultValue={teamNames[index] || ''}
+                        onBlur={(event) => teamNames[index] = event.target.value}
+                    />
+                )
+            }
+        </fieldset>
+    );
 };
 
 const TeamNameField = ({ teamId, ...rest }) => (
