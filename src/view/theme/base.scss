@@ -41,6 +41,10 @@ body {
         height: 30px;
         width: 160px;
         font-family: 'Roboto', sans-serif;
+
+        &.small {
+            width: 40px;
+        }
     }
 
     .numberfield {

@@ -125,14 +125,16 @@ const Settings = ({ moveDuration, scoreToWin, updateHandler }) => (
         <legend>Настройки</legend>
         <TextField
             name="moveDuration"
-            label="Продолжительность хода (сек.)"
+            label="Длительность хода (сек.)"
             defaultValue={moveDuration}
+            className="small"
             onBlur={updateHandler}
         />
         <TextField
             name="scoreToWin"
-            label="Очков для победы"
+            label="Очки для победы"
             defaultValue={scoreToWin}
+            className="small"
             onBlur={updateHandler}
         />
     </fieldset>
