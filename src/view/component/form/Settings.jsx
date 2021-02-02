@@ -64,7 +64,7 @@ class Teams extends React.Component {
             <fieldset>
                 <legend>
                     <span>Команды</span>
-                    <button className="small" onClick={this.addTeam}>Добавить</button>
+                    <button className="small" onClick={this.addTeam}>&#43; Добавить</button>
                 </legend>
                 {
                     Array.from({ length: this.state.teamsNumber }, (_value, index) =>
