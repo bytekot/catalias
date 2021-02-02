@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default class MoveForm extends React.Component {
 
@@ -70,6 +70,39 @@ export default class MoveForm extends React.Component {
         )
     }
 }
+
+/*
+const WordCard = ({ word }) => {
+    const [animated, setAnimated] = useState(false);
+    const previousWordReference = useRef();
+    const previousWord = previousWordReference.current;
+
+    useEffect(() => {
+        if (typeof previousWord !== 'undefined' && previousWord !== word) {
+            setAnimated(true);
+
+            const timer = setTimeout(() => {
+                previousWordReference.current = word;
+                setAnimated(false);
+            }, 400);
+
+            return () => clearTimeout(timer);
+        }
+
+        previousWordReference.current = word;
+    }, [ word ]);
+
+    return (
+        <div className="move-card-container">
+            <div className={`card ${animated ? 'animated' : ''}`}>
+                <span className="move-word">{word}</span>
+            </div>
+            <div className="card"></div>
+            <div className="card"></div>
+        </div>
+    );
+};
+*/
 
 class WordCard extends React.Component {
     state = {

@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "build",
+        "outDir": "docs",
         "target": "es5",
         "resolveJsonModule": true,
         "esModuleInterop": true
