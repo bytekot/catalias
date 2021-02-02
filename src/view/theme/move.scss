@@ -62,6 +62,16 @@ $brown: #404040;
             span {
                 line-height: 250px;
             }
+
+            &.animated { 
+                animation-duration: 1s; 
+                animation-fill-mode: both;
+                animation-name: bounceOutLeft;
+
+                .move-word {
+                    text-decoration: line-through;
+                }
+            }
         }
     }
 
@@ -81,6 +91,12 @@ $brown: #404040;
         font-size: xx-large;
         padding: 10px 0 20px 0;
     }
+
+    .move-score {
+        background-color: $yellow;
+        padding: 3px 8px;
+        border-radius: 20px;
+    }
 }
 
 @keyframes loader {
@@ -90,4 +106,18 @@ $brown: #404040;
     to {
         width: 0;
     }
+}
+
+@keyframes bounceOutLeft { 
+    0% { 
+        transform: translateX(0); 
+    } 
+    20% { 
+        opacity: 1; 
+        transform: translateX(20px); 
+    } 
+    100% { 
+        opacity: 0; 
+        transform: translateX(-2000px); 
+    } 
 }

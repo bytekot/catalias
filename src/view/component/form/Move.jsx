@@ -71,6 +71,39 @@ export default class MoveForm extends React.Component {
     }
 }
 
+class WordCard extends React.Component {
+    state = {
+        animated: false
+    };
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.word !== this.props.word) {
+            const nextWord = nextProps.word;
+    
+            nextProps.word = this.props.word;
+
+            this.setState({ animated:true });
+
+            setTimeout(() => {
+                this.props.word = nextWord;
+                this.setState({ animated: false });
+            }, 400);
+        }
+    }
+
+    render() {
+        return (
+            <div className="move-card-container">
+                <div className={`card ${this.state.animated ? 'animated' : ''}`}>
+                    <span className="move-word">{this.props.word}</span>
+                </div>
+                <div className="card"></div>
+                <div className="card"></div>
+            </div>
+        );
+    }
+}
+
 const ProgressBar = ({ duration, timeLeft }) => (
     <div>
         <div className="progress-bar">
@@ -85,19 +118,9 @@ const ProgressBar = ({ duration, timeLeft }) => (
     </div>
 );
 
-const WordCard = ({ word }) => (
-    <div className="move-card-container">
-        <div className="card">
-            <span className="move-word">{word}</span>
-        </div>
-        <div className="card"></div>
-        <div className="card"></div>
-    </div>
-);
-
 const Score = ({ score }) => (
     <div className="move-score-container">
         <label>Очки: </label>
-        <span>{score}</span>
+        <span className="move-score">{score}</span>
     </div>
 );
