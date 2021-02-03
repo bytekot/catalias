@@ -21,15 +21,19 @@ export default class GameWindow extends React.Component {
 
         return (
             <div>
-                <TeamNames teams={game.teams} />
-                <DisplayField
-                    label="Очки для победы"
-                    value={this.props.scoreToWin}
-                />
                 <Status 
                     finished={finished}
                     teamName={!finished ? game.getCurrentTeam().name : game.getWinnerName()}
                 />
+                <div className="card-container">
+                    <div className="card">
+                        <TeamNames teams={game.teams} />
+                        <DisplayField
+                            label="Очки для победы"
+                            value={this.props.scoreToWin}
+                        />
+                    </div>
+                </div>
                 <div class="button-container">
                     <button 
                         class={finished ? "hidden" : ""}

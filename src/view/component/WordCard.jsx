@@ -21,7 +21,7 @@ const WordCard = ({ word }) => {
     }, [word]);
 
     return (
-        <div className="move-card-container">
+        <div className="card-container">
             <div className={`card ${animated ? 'animated' : ''}`}>
                 <span className="move-word">{!animated ? word : previousWord}</span>
             </div>

@@ -1,0 +1,45 @@
+.card-container {
+  height: 250px;
+  width: 300px;
+  margin: auto;
+  padding: 15px 0 25px 0;
+  text-align: center;
+  --offset-multiplier: 4px;
+
+  .card {
+    position: absolute;
+    height: 250px;
+    width: 300px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1),
+      0px -4px 8px rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    text-align: center;
+    --translate: calc(var(--offset) * var(--offset-multiplier));
+    transform: translate(var(--translate), var(--translate));
+    z-index: 5;
+
+    @for $index from 1 through 5 {
+      &:nth-child(#{$index}) {
+        --offset: #{-1 + $index};
+        z-index: #{5 - $index};
+      }
+    }
+
+    &.animated {
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      animation-name: bounceOutLeft;
+
+      .move-word {
+        text-decoration: line-through;
+      }
+    }
+  }
+}
+
+.card .field-container:first-child {
+  padding-top: 32px;
+}

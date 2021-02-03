@@ -1,121 +1,82 @@
-$yellow: #FFE800;
+$yellow: #ffe800;
 $brown: #404040;
 
 .move-container {
-    .progress-bar {
-        border-radius: 5px;
-        border: 1px solid $brown;
-        border-left-width: 2px;
-        border-right-width: 2px;
-        overflow: hidden;
-        width: 100%;
+  .progress-bar {
+    border-radius: 5px;
+    border: 1px solid $brown;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    overflow: hidden;
+    width: 100%;
 
-        span {
-            display: block;
-        }
-
-        .bar {
-            background: #fff;
-
-            .progress {
-                --progress-animation-duration: 60s;
-                animation: loader var(--progress-animation-duration) linear forwards;
-                background: $yellow;
-                color: #fff;
-                padding: 7px;
-                width: 0;
-            }
-        }
+    span {
+      display: block;
     }
 
-    .move-card-container {
-        height: 250px;
-        width: 300px;
-        margin: auto;
-        padding: 15px 0 25px 0;
-        text-align: center;
-        --offset-multiplier: 4px;
+    .bar {
+      background: #fff;
 
-        .card {
-            position: absolute;
-            height: 250px;
-            width: 300px;
-            padding: 0 16px;
-            box-sizing: border-box;
-            background: #fff;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px -4px 8px rgba(255, 255, 255, 0.8);
-            border-radius: 4px;
-            text-align: center;
-            --translate: calc(var(--offset) * var(--offset-multiplier));
-            transform: translate(var(--translate), var(--translate));
-            z-index: 5;
-            
-            @for $index from 1 through 5 {
-                &:nth-child(#{$index}) {
-                    --offset: #{-1 + $index};
-                    z-index: #{5 - $index};
-                }
-            }
-
-            span {
-                line-height: 250px;
-            }
-
-            &.animated { 
-                animation-duration: 1s; 
-                animation-fill-mode: both;
-                animation-name: bounceOutLeft;
-
-                .move-word {
-                    text-decoration: line-through;
-                }
-            }
-        }
+      .progress {
+        --progress-animation-duration: 60s;
+        animation: loader var(--progress-animation-duration) linear forwards;
+        background: $yellow;
+        color: #fff;
+        padding: 7px;
+        width: 0;
+      }
     }
+  }
 
-    .move-score-container,
-    .move-buttons-container,
-    .move-timer,
-    .move-word {
-        text-align: center;
+  .card {
+    span {
+      line-height: 250px;
     }
+  }
 
-    .move-word {
-        font-size: x-large;
-        user-select: none;
-    }
+  .move-score-container,
+  .move-buttons-container,
+  .move-timer,
+  .move-word {
+    text-align: center;
+  }
 
-    .move-timer {
-        font-size: xx-large;
-        padding: 10px 0 20px 0;
-    }
+  .move-word {
+    font-size: x-large;
+    user-select: none;
+  }
 
-    .move-score {
-        background-color: $yellow;
-        padding: 3px 8px;
-        border-radius: 20px;
-    }
+  .move-timer {
+    font-size: xx-large;
+    padding: 10px 0 20px 0;
+  }
+
+  .move-score {
+    background-color: $yellow;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
 }
 
 @keyframes loader {
-    from {
-        width: 100%;
-    }
-    to {
-        width: 0;
-    }
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
 }
 
-@keyframes bounceOutLeft { 
-    0% { 
-        transform: translateX(0); 
-    } 
-    20% { 
-        opacity: 1; 
-        transform: translateX(20px); 
-    } 
-    100% { 
-        opacity: 0; 
-        transform: translateX(-2000px); 
-    } 
+@keyframes bounceOutLeft {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-2000px);
+  }
 }
