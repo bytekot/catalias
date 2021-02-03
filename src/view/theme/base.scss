@@ -9,6 +9,7 @@ body {
     padding: 15px;
     max-width: 700px;
     font-family: 'Kelly Slab', cursive;
+    color: #404040;
     letter-spacing: 0.8px;
     font-weight: 500;
     background-color: #F9F9F9;
@@ -58,16 +59,14 @@ body {
     text-align: center;
     font-size: xx-large;
     padding: 0 32px 32px 0;
-
-    img {
-        height: 64px;
-        width: 64px;
-        margin: 0 -15px -15px 0;
-    }
 }
 
 svg {
     padding-right: 12px;
     color: #ccc;
-    font-size: 32px;
+
+    &.header-logo {
+        height: 40px;
+        color: #404040;
+    }
 }

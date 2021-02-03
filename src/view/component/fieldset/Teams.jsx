@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TeamNameField from '../field/TeamName.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserFriends } from '@fortawesome/free-solid-svg-icons'
+import { faUserFriends, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const TeamsFieldset = ({ teamNames }) => {
     const [teamsNumber, setTeamsNumber] = useState(2);
@@ -14,7 +14,12 @@ const TeamsFieldset = ({ teamNames }) => {
                 <button
                     className="small"
                     onClick={() => setTeamsNumber(teamsNumber + 1)}
-                >&#43; Добавить
+                >
+                    <FontAwesomeIcon
+                        icon={faPlus}
+                        className="icon-button"
+                    />
+                    <span>Добавить</span>
                 </button>
             </legend>
             {

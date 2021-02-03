@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Header from './component/Header.jsx';
 import SettingsWindow from './component/window/Settings.jsx';
 import GameWindow from './component/window/Game.jsx';
 import MoveWindow from './component/window/Move.jsx';
@@ -78,5 +79,11 @@ class App extends React.Component {
 }
 
 document.addEventListener("DOMContentLoaded", () => 
-    ReactDOM.render(<App />, document.getElementById('root'))
+    ReactDOM.render(
+        <div>
+            <Header />
+            <App />
+        </div>,
+        document.getElementById('root')
+    )
 );

@@ -73,6 +73,28 @@ button {
     transform: rotate(45deg);
     z-index: -1;
   }
+
+  &.small {
+    padding: 5px 10px;
+    margin: 0 0 0 48px;
+    font-size: x-small;
+    box-shadow: -4px 4px 0 $brown;
+
+    &:hover {
+        top: 2px;
+        left: -2px;
+        box-shadow: -2px 2px 0 $brown;
+    }
+
+    &:active {
+        box-shadow: none;
+    }
+}
+
+  .icon-button {
+    color: $brown;
+    padding-right: 8px;
+  }
 }
 
 button { position: relative; }
@@ -95,21 +117,4 @@ button:active {
 
 button, button:visited, button:focus, button:active, button:hover{
     outline: 0 none !important;
-}
-
-button.small {
-    padding: 5px 10px;
-    margin: 0 0 0 18px;
-    font-size: x-small;
-    box-shadow: -4px 4px 0 $brown;
-
-    &:hover {
-        top: 2px;
-        left: -2px;
-        box-shadow: -2px 2px 0 $brown;
-    }
-
-    &:active {
-        box-shadow: none;
-    }
 }
