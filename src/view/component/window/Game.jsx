@@ -1,7 +1,7 @@
 import React from 'react';
 import DisplayField from '../field/Display.jsx';
 
-export default class GameForm extends React.Component {
+export default class GameWindow extends React.Component {
 
     constructor(props) {
         super(props);

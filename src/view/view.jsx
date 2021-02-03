@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SettingsForm from './component/form/Settings.jsx';
-import GameForm from './component/form/Game.jsx';
-import MoveForm from './component/form/Move.jsx';
+import SettingsWindow from './component/window/Settings.jsx';
+import GameWindow from './component/window/Game.jsx';
+import MoveWindow from './component/window/Move.jsx';
 import { Move } from '../core/Move';
 import { Team } from '../core/Team';
 import { Game } from '../core/Game';
@@ -54,7 +54,7 @@ class App extends React.Component {
 
         if (state.move) {
             return (
-                <MoveForm
+                <MoveWindow
                     duration={state.moveDuration}
                     getWord={state.game.dictionary.getRandomWord.bind(state.game.dictionary)}
                     move={state.move}
@@ -65,8 +65,8 @@ class App extends React.Component {
 
         return (
             !state.game
-                ? <SettingsForm onButtonClick={this.onNewGameButtonClick} />
-                : <GameForm
+                ? <SettingsWindow onButtonClick={this.onNewGameButtonClick} />
+                : <GameWindow
                     teamNames={state.teamNames}
                     scoreToWin={state.scoreToWin}
                     onButtonClick={this.onNewMoveButtonClick}

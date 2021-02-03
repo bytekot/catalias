@@ -3,7 +3,7 @@ import TeamsFieldset from '../fieldset/Teams.jsx';
 import DictionariesFieldset from '../fieldset/Dictionaries.jsx';
 import AdditionalSettingsFieldset from '../fieldset/AdditionalSettings.jsx';
 
-export default class SettingsForm extends React.Component {
+export default class SettingsWindow extends React.Component {
     state = {
         teamNames: ['Бешеные псы', 'Бесславные ублюдки'],
         dictionaries: ['Базовый набор'],

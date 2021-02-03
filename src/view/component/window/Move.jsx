@@ -2,7 +2,7 @@ import React from 'react';
 import ProgressBar from '../ProgressBar.jsx';
 import WordCard from '../WordCard.jsx';
 
-export default class MoveForm extends React.Component {
+export default class MoveWindow extends React.Component {
 
     constructor({ duration, getWord, move }) {
         super();
