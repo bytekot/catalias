@@ -1,36 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import "button.scss";
+@import "move.scss";
+@import "./window/Settings.scss";
 
 body {
     margin: auto;
     padding: 15px;
-    max-width: 600px;
+    max-width: 700px;
     font-family: 'Kelly Slab', cursive;
     letter-spacing: 0.8px;
     font-weight: 500;
     background-color: #F9F9F9;
-
-    fieldset {
-        border: none;
-        margin: 10px 0;
-        border-bottom: #eee solid 1px;
-
-        legend {
-            padding: 10px 0;
-            font-size: large;
-            font-weight: 700;
-            letter-spacing: 1.4px;
-        }
-
-        .label {
-            margin-right: 10px;
-        }
-
-        .sub-label {
-            font-family: 'Roboto', sans-serif;
-            font-size: small;
-        }
-    }
 
     .field-container {
         margin-top: 10px;
@@ -76,7 +57,7 @@ body {
 .header {
     text-align: center;
     font-size: xx-large;
-    margin-bottom: 30px;
+    padding: 0 32px 32px 0;
 
     img {
         height: 64px;

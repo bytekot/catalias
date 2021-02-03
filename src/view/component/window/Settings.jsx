@@ -24,18 +24,22 @@ export default class SettingsWindow extends React.Component {
 
     render() {
         return (
-            <div>
-                <TeamsFieldset
-                    teamNames={this.state.teamNames}
-                />
-                <DictionariesFieldset
-                    dictionaries={this.state.dictionaries}
-                />
-                <AdditionalSettingsFieldset
-                    moveDuration={this.state.moveDuration}
-                    scoreToWin={this.state.scoreToWin}
-                    updateHandler={this.updateState}
-                />
+            <div className="settings-window-container">
+                <div className="settings-container">
+                    <TeamsFieldset
+                        teamNames={this.state.teamNames}
+                    />
+                    <div>
+                        <DictionariesFieldset
+                            dictionaries={this.state.dictionaries}
+                        />
+                        <AdditionalSettingsFieldset
+                            moveDuration={this.state.moveDuration}
+                            scoreToWin={this.state.scoreToWin}
+                            updateHandler={this.updateState}
+                        />
+                    </div>
+                </div>
                 <div className="button-container">
                     <button onClick={this.onNewGameButtonClick}>Играть</button>
                 </div>
