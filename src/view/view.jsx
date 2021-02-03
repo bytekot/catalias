@@ -84,6 +84,6 @@ document.addEventListener("DOMContentLoaded", () =>
             <Header />
             <App />
         </div>,
-        document.getElementById('root')
+        document.body
     )
 );
