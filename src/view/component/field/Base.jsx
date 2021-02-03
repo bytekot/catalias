@@ -1,4 +1,5 @@
 import React from 'react';
+import FieldLabel from './FieldLabel.jsx';
 
 const BaseField = ({
     type,
@@ -6,13 +7,14 @@ const BaseField = ({
     defaultValue,
     className,
     label,
+    subLabel,
     onBlur,
     defaultChecked,
     labelPosition = 'before'
 }) => (
     <div className="field-container team-name-container">
         {
-            labelPosition === 'before' ? <label>{label}</label> : ''
+            labelPosition === 'before' ? <FieldLabel labelText={label} subLabelText={subLabel} /> : ''
         }
         <input
             type={type}
@@ -23,7 +25,7 @@ const BaseField = ({
             defaultChecked={defaultChecked}
         />
         {
-            labelPosition === 'after' ? <label>{label}</label> : ''
+            labelPosition === 'after' ? <FieldLabel labelText={label} subLabelText={subLabel} /> : ''
         }
     </div>
 );

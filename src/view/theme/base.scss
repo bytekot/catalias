@@ -22,8 +22,13 @@ body {
             letter-spacing: 1.4px;
         }
 
-        label {
+        .label {
             margin-right: 10px;
+        }
+
+        .sub-label {
+            font-family: 'Roboto', sans-serif;
+            font-size: small;
         }
     }
 

@@ -6,7 +6,8 @@ const AdditionalSettingsFieldset = ({ moveDuration, scoreToWin, updateHandler })
         <legend>Настройки</legend>
         <TextField
             name="moveDuration"
-            label="Длительность хода (сек.)"
+            label="Длительность хода"
+            subLabel="(сек.)"
             defaultValue={moveDuration}
             className="small"
             onBlur={updateHandler}
