@@ -1,6 +1,8 @@
 import React from 'react';
 import ProgressBar from '../ProgressBar.jsx';
 import WordCard from '../WordCard.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 export default class MoveWindow extends React.Component {
 
@@ -64,9 +66,15 @@ export default class MoveWindow extends React.Component {
                 />
                 <Score score={this.state.score} />
                 <WordCard word={this.state.currentWord} />
-                <div className="move-buttons-container">
-                    <button onClick={this.setNewWord}>&#10060; Пропустить слово</button>
-                    <button onClick={this.onButtonNextClick}>&#10004; Засчитать слово</button>
+                <div className="buttons-container">
+                    <button onClick={this.setNewWord}>
+                        <FontAwesomeIcon icon={faTimes} className="icon-button" />
+                        <span>Пропустить слово</span>
+                    </button>
+                    <button onClick={this.onButtonNextClick}>
+                        <FontAwesomeIcon icon={faCheck} className="icon-button" />
+                        <span>Засчитать слово</span>
+                    </button>
                 </div>
             </div>
         )

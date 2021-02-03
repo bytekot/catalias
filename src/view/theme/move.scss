@@ -3,7 +3,7 @@ $brown: #404040;
 
 .move-container {
   .progress-bar {
-    border-radius: 5px;
+    border-radius: 12px;
     border: 1px solid $brown;
     border-left-width: 2px;
     border-right-width: 2px;
@@ -20,7 +20,7 @@ $brown: #404040;
       .progress {
         --progress-animation-duration: 60s;
         animation: loader var(--progress-animation-duration) linear forwards;
-        background: $yellow;
+        background: #7373D9;
         color: #fff;
         padding: 7px;
         width: 0;
@@ -35,7 +35,7 @@ $brown: #404040;
   }
 
   .move-score-container,
-  .move-buttons-container,
+  .buttons-container,
   .move-timer,
   .move-word {
     text-align: center;
@@ -52,9 +52,14 @@ $brown: #404040;
   }
 
   .move-score {
-    background-color: $yellow;
+    background-color: #7373D9;
+    color: #fff;
     padding: 3px 8px;
     border-radius: 20px;
+  }
+
+  .buttons-container {
+      padding-top: 20px;
   }
 }
 

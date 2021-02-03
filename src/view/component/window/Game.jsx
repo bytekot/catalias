@@ -1,5 +1,7 @@
 import React from 'react';
 import DisplayField from '../field/Display.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 
 export default class GameWindow extends React.Component {
 
@@ -18,22 +20,22 @@ export default class GameWindow extends React.Component {
     render() {
         const game = this.state.game;
         const finished = game.isFinished();
+        const currentTeamName = game.getCurrentTeam().name;
 
         return (
-            <div>
+            <div className="game-window-container">
+                <DisplayField
+                    label="Очки для победы"
+                    value={this.props.scoreToWin}
+                />
                 <Status 
                     finished={finished}
                     teamName={!finished ? game.getCurrentTeam().name : game.getWinnerName()}
                 />
-                <div className="card-container">
-                    <div className="card">
-                        <TeamNames teams={game.teams} />
-                        <DisplayField
-                            label="Очки для победы"
-                            value={this.props.scoreToWin}
-                        />
-                    </div>
-                </div>
+                <TeamNames
+                    teams={game.teams}
+                    currentTeam={currentTeamName}
+                />
                 <div class="button-container">
                     <button 
                         class={finished ? "hidden" : ""}
@@ -51,18 +53,31 @@ export default class GameWindow extends React.Component {
     }
 }
 
-const TeamNames = ({ teams }) => (
-    teams.map(team =>
-        <DisplayField
-            label={team.name}
-            value={team.score}
-        />
-    )
+const TeamNames = ({ teams, currentTeam }) => (
+    <div className="game-teams-container">
+    {
+        teams.map(team => {
+            const current = currentTeam === team.name;
+
+            return (
+                <div style={{'position': 'relative'}}>
+                    {current ? <FontAwesomeIcon icon={faLongArrowAltRight} size="2x" /> : ''}
+                    <div className={`team-card ${current ? "current" : ""}`}>
+                        <DisplayField
+                            label={team.name}
+                            value={team.score}
+                        />
+                    </div>
+                </div>
+            );
+        })
+    }
+    </div>
 );
 
 const Status = ({ finished, teamName }) => (
     <div class="title">
-        <span>{!finished ? "Ход" : "🏆 Победа"} команды </span>
+        <span>{!finished ? "Ход" : "Победа"} команды </span>
         <span>"{teamName}"</span>
     </div>
 );

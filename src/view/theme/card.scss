@@ -43,3 +43,32 @@
 .card .field-container:first-child {
   padding-top: 32px;
 }
+
+.game-window-container {
+  text-align: center;
+
+  .game-teams-container {
+    svg {
+      position: absolute;
+      top: 8px;
+      left: 180px;
+      color: #7373d9;
+    }
+
+    .team-card {
+      background: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1),
+        0px -4px 8px rgba(255, 255, 255, 0.8);
+      border-radius: 4px;
+      height: 48px;
+      width: 264px;
+      line-height: 48px;
+      margin: 16px auto;
+
+      &.current {
+        background-color: #7373d9;
+        color: #fff;
+      }
+    }
+  }
+}
