@@ -1,9 +1,14 @@
 import React from 'react';
 import TextField from '../field/Text.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSlidersH } from '@fortawesome/free-solid-svg-icons'
 
 const AdditionalSettingsFieldset = ({ moveDuration, scoreToWin, updateHandler }) => (
     <fieldset>
-        <legend>Настройки</legend>
+        <legend>
+            <FontAwesomeIcon icon={faSlidersH} />
+            <span>Настройки</span>
+        </legend>
         <TextField
             name="moveDuration"
             label="Длительность хода"

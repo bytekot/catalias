@@ -1,6 +1,8 @@
 import React from 'react';
 import CheckboxField from '../field/Checkbox.jsx';
 import { dictionaryTypes } from '../../../core/Dictionary';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBook } from '@fortawesome/free-solid-svg-icons'
 
 const DictionariesFieldset = ({ dictionaries }) => {
     const onBlur = event => {
@@ -20,7 +22,10 @@ const DictionariesFieldset = ({ dictionaries }) => {
 
     return (
         <fieldset>
-            <legend>Наборы слов</legend>
+            <legend>
+                <FontAwesomeIcon icon={faBook} />
+                <span>Наборы слов</span>
+            </legend>
             {
                 dictionaryTypes.map(type =>
                     <CheckboxField

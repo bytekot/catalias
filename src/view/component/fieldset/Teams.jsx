@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import TeamNameField from '../field/TeamName.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserFriends } from '@fortawesome/free-solid-svg-icons'
 
 const TeamsFieldset = ({ teamNames }) => {
     const [teamsNumber, setTeamsNumber] = useState(2);
@@ -7,6 +9,7 @@ const TeamsFieldset = ({ teamNames }) => {
     return (
         <fieldset>
             <legend>
+                <FontAwesomeIcon icon={faUserFriends} />
                 <span>Команды</span>
                 <button
                     className="small"
