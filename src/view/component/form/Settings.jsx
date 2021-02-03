@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import TextField from '../field/Text.jsx';
-import CheckboxField from '../field/Checkbox.jsx';
-import { dictionaryTypes } from '../../../core/Dictionary';
+import React from 'react';
+import TeamsFieldset from '../fieldset/Teams.jsx';
+import DictionariesFieldset from '../fieldset/Dictionaries.jsx';
+import AdditionalSettingsFieldset from '../fieldset/AdditionalSettings.jsx';
 
 export default class SettingsForm extends React.Component {
     state = {
@@ -25,13 +25,13 @@ export default class SettingsForm extends React.Component {
     render() {
         return (
             <div>
-                <Teams
+                <TeamsFieldset
                     teamNames={this.state.teamNames}
                 />
-                <Dictionaries
+                <DictionariesFieldset
                     dictionaries={this.state.dictionaries}
                 />
-                <Settings
+                <AdditionalSettingsFieldset
                     moveDuration={this.state.moveDuration}
                     scoreToWin={this.state.scoreToWin}
                     updateHandler={this.updateState}
@@ -43,90 +43,3 @@ export default class SettingsForm extends React.Component {
         );
     }
 }
-
-const Teams = ({ teamNames }) => {
-    const [teamsNumber, setTeamsNumber] = useState(2);
-
-    return (
-        <fieldset>
-            <legend>
-                <span>Команды</span>
-                <button
-                    className="small"
-                    onClick={() => setTeamsNumber(teamsNumber + 1)}
-                >&#43; Добавить
-                </button>
-            </legend>
-            {
-                Array.from({ length: teamsNumber }, (_value, index) =>
-                    <TeamNameField
-                        teamId={index}
-                        defaultValue={teamNames[index] || ''}
-                        onBlur={(event) => teamNames[index] = event.target.value}
-                    />
-                )
-            }
-        </fieldset>
-    );
-};
-
-const TeamNameField = ({ teamId, ...rest }) => (
-    <TextField
-        name={teamId}
-        label={`Команда ${teamId + 1}`}
-        {...rest}
-    />
-);
-
-const Dictionaries = ({ dictionaries }) => {
-    const onBlur = event => {
-        const name = event.target.name;
-        const checked = event.target.checked;
-        const included = dictionaries.includes(name);
-
-        if (checked && !included) {
-            dictionaries.push(name);
-            return;
-        }
-
-        if (!checked && included) {
-            dictionaries.filter(dictionary => dictionary !== name);
-        }
-    };
-
-    return (
-        <fieldset>
-            <legend>Наборы слов</legend>
-            {
-                dictionaryTypes.map(type =>
-                    <CheckboxField
-                        name={type}
-                        label={type}
-                        defaultChecked={dictionaries.includes(type)}
-                        onBlur={onBlur}
-                    />
-                )
-            }
-        </fieldset>
-    );
-};
-
-const Settings = ({ moveDuration, scoreToWin, updateHandler }) => (
-    <fieldset>
-        <legend>Настройки</legend>
-        <TextField
-            name="moveDuration"
-            label="Длительность хода (сек.)"
-            defaultValue={moveDuration}
-            className="small"
-            onBlur={updateHandler}
-        />
-        <TextField
-            name="scoreToWin"
-            label="Очки для победы"
-            defaultValue={scoreToWin}
-            className="small"
-            onBlur={updateHandler}
-        />
-    </fieldset>
-);
