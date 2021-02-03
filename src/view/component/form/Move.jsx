@@ -71,72 +71,6 @@ export default class MoveForm extends React.Component {
     }
 }
 
-/*
-const WordCard = ({ word }) => {
-    const [animated, setAnimated] = useState(false);
-    const previousWordReference = useRef();
-    const previousWord = previousWordReference.current;
-
-    useEffect(() => {
-        if (typeof previousWord !== 'undefined' && previousWord !== word) {
-            setAnimated(true);
-
-            const timer = setTimeout(() => {
-                previousWordReference.current = word;
-                setAnimated(false);
-            }, 400);
-
-            return () => clearTimeout(timer);
-        }
-
-        previousWordReference.current = word;
-    }, [ word ]);
-
-    return (
-        <div className="move-card-container">
-            <div className={`card ${animated ? 'animated' : ''}`}>
-                <span className="move-word">{word}</span>
-            </div>
-            <div className="card"></div>
-            <div className="card"></div>
-        </div>
-    );
-};
-*/
-
-class WordCard extends React.Component {
-    state = {
-        animated: false
-    };
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.word !== this.props.word) {
-            const nextWord = nextProps.word;
-    
-            nextProps.word = this.props.word;
-
-            this.setState({ animated:true });
-
-            setTimeout(() => {
-                this.props.word = nextWord;
-                this.setState({ animated: false });
-            }, 400);
-        }
-    }
-
-    render() {
-        return (
-            <div className="move-card-container">
-                <div className={`card ${this.state.animated ? 'animated' : ''}`}>
-                    <span className="move-word">{this.props.word}</span>
-                </div>
-                <div className="card"></div>
-                <div className="card"></div>
-            </div>
-        );
-    }
-}
-
 const ProgressBar = ({ duration, timeLeft }) => (
     <div>
         <div className="progress-bar">
@@ -157,3 +91,34 @@ const Score = ({ score }) => (
         <span className="move-score">{score}</span>
     </div>
 );
+
+const WordCard = ({ word }) => {
+    const [animated, setAnimated] = useState(false);
+    const previousWordReference = useRef();
+    const previousWord = previousWordReference.current;
+
+    useEffect(() => {
+        if (typeof previousWord !== 'undefined' && previousWord !== word) {
+            setAnimated(true);
+
+            const timerId = setTimeout(() => {
+                previousWordReference.current = word;
+                setAnimated(false);
+            }, 400);
+
+            return () => clearTimeout(timerId);
+        }
+
+        previousWordReference.current = word;
+    }, [ word ]);
+
+    return (
+        <div className="move-card-container">
+            <div className={`card ${animated ? 'animated' : ''}`}>
+                <span className="move-word">{!animated ? word : previousWord}</span>
+            </div>
+            <div className="card"></div>
+            <div className="card"></div>
+        </div>
+    );
+};
