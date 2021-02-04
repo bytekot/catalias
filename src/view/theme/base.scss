@@ -6,6 +6,11 @@
 @import "./window/Settings.scss";
 
 body {
+    margin: 0;
+    background-color: #F9F9F9;
+}
+
+.app-container {
     margin: auto;
     padding: 15px;
     max-width: 700px;
@@ -57,6 +62,7 @@ body {
 }
 
 .header {
+    padding-top: 8px;
     text-align: center;
     
     button {

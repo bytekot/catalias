@@ -76,7 +76,7 @@ class App extends React.Component {
         }
 
         return (
-            <div>
+            <div class="app-container">
                 <Header onClick={this.onGameEnd} />
                 {window}
             </div>
