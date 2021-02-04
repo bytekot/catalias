@@ -1,7 +1,7 @@
 import React from 'react';
 import DisplayField from '../field/Display.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
+import { faLongArrowAltRight, faCrown } from '@fortawesome/free-solid-svg-icons'
 
 export default class GameWindow extends React.Component {
 
@@ -20,7 +20,7 @@ export default class GameWindow extends React.Component {
     render() {
         const game = this.state.game;
         const finished = game.isFinished();
-        const currentTeamName = game.getCurrentTeam().name;
+        const currentTeamName = !finished ? game.getCurrentTeam().name : game.getWinnerName();
 
         return (
             <div className="game-window-container">
@@ -30,11 +30,12 @@ export default class GameWindow extends React.Component {
                 />
                 <Status 
                     finished={finished}
-                    teamName={!finished ? game.getCurrentTeam().name : game.getWinnerName()}
+                    teamName={currentTeamName}
                 />
                 <TeamNames
                     teams={game.teams}
                     currentTeam={currentTeamName}
+                    finished={finished}
                 />
                 <div class="button-container">
                     <button 
@@ -53,7 +54,7 @@ export default class GameWindow extends React.Component {
     }
 }
 
-const TeamNames = ({ teams, currentTeam }) => (
+const TeamNames = ({ teams, currentTeam, finished }) => (
     <div className="game-teams-container">
     {
         teams.map(team => {
@@ -61,7 +62,7 @@ const TeamNames = ({ teams, currentTeam }) => (
 
             return (
                 <div style={{'position': 'relative'}}>
-                    {current ? <FontAwesomeIcon icon={faLongArrowAltRight} size="2x" /> : ''}
+                    {current && !finished ? <FontAwesomeIcon icon={faLongArrowAltRight} size="2x" /> : ''}
                     <div className={`team-card ${current ? "current" : ""}`}>
                         <DisplayField
                             label={team.name}
