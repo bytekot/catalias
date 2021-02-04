@@ -41,7 +41,12 @@ export default class SettingsWindow extends React.Component {
                     </div>
                 </div>
                 <div className="button-container">
-                    <button onClick={this.onNewGameButtonClick}>Играть</button>
+                    <button
+                        className="button"
+                        onClick={this.onNewGameButtonClick}
+                    >
+                        <span>Играть</span>
+                    </button>
                 </div>
             </div>
         );

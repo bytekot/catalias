@@ -8,7 +8,7 @@ $angle-o: 4px;
     text-align: center;
 }
 
-button {
+.button {
   margin: 25px 15px 0 15px;
   top: 0;
   left: 0;
@@ -97,9 +97,9 @@ button {
   }
 }
 
-button { position: relative; }
+.button { position: relative; }
 
-button:active {
+.button:active {
   top: 6px;
   left: -6px;
   box-shadow: none;

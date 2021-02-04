@@ -58,8 +58,20 @@ body {
 
 .header {
     text-align: center;
-    font-size: xx-large;
-    padding: 0 32px 32px 0;
+    
+    button {
+        font-family: 'Kelly Slab', cursive;
+        font-size: xx-large;
+        font-weight: 500;
+        letter-spacing: 0.8px;
+
+        background-color: inherit;
+        color: #404040;
+        border: none;
+        cursor: pointer;
+
+        padding: 0 32px 32px 0;
+    }
 }
 
 svg {

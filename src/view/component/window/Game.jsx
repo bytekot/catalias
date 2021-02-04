@@ -38,15 +38,17 @@ export default class GameWindow extends React.Component {
                     finished={finished}
                 />
                 <div class="button-container">
-                    <button 
-                        class={finished ? "hidden" : ""}
+                    <button
+                        className={`button ${finished ? "hidden" : ""}`}
                         onClick={this.onNewMoveButtonClick}
-                    >   Начать ход
+                    >
+                        <span>Начать ход</span>
                     </button>
                     <button
-                        class={!finished ? "hidden" : ""}
+                        className={`button ${!finished ? "hidden" : ""}`}
                         onClick={this.props.onFinish}
-                    >   Новая игра
+                    >
+                        <span>Новая игра</span>
                     </button>
                 </div>
             </div>

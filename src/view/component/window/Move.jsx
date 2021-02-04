@@ -67,11 +67,11 @@ export default class MoveWindow extends React.Component {
                 <Score score={this.state.score} />
                 <WordCard word={this.state.currentWord} />
                 <div className="buttons-container">
-                    <button onClick={this.setNewWord}>
+                    <button className="button" onClick={this.setNewWord}>
                         <FontAwesomeIcon icon={faTimes} className="icon-button" />
                         <span>Пропустить слово</span>
                     </button>
-                    <button onClick={this.onButtonNextClick}>
+                    <button className="button" onClick={this.onButtonNextClick}>
                         <FontAwesomeIcon icon={faCheck} className="icon-button" />
                         <span>Засчитать слово</span>
                     </button>

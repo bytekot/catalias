@@ -12,7 +12,7 @@ const TeamsFieldset = ({ teamNames }) => {
                 <FontAwesomeIcon icon={faUserFriends} />
                 <span>Команды</span>
                 <button
-                    className="small"
+                    className="button small"
                     onClick={() => setTeamsNumber(teamsNumber + 1)}
                 >
                     <FontAwesomeIcon
