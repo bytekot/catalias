@@ -2,6 +2,16 @@ import dictionary from '../dictionary.json';
 
 export const dictionaryTypes = Object.keys(dictionary);
 
+export const dictionaryReference = (dictionary => {
+    const reference = [];
+
+    for (const type in dictionary) {
+        reference[type] = dictionary[type].length;
+    }
+
+    return reference;
+})(dictionary);
+
 export class Dictionary {
     public readonly words: string[];
 
