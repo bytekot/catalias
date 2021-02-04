@@ -9,11 +9,14 @@ export default class MoveWindow extends React.Component {
     constructor({ duration, getWord, move }) {
         super();
 
+        const currentWord = getWord();
+
         this.state = {
             score: 0,
             duration: duration,
             timeLeft: duration,
-            currentWord: getWord()
+            currentWord: currentWord.word,
+            currentWordDictionary: currentWord.dictionary
         };
     }
 
@@ -43,8 +46,11 @@ export default class MoveWindow extends React.Component {
 
     setNewWord = () => {
         if (!this.props.move.isFinished()) {
+            const currentWord = this.props.getWord();
+
             this.setState({
-                currentWord: this.props.getWord()
+                currentWord: currentWord.word,
+                currentWordDictionary: currentWord.dictionary
             });
 
             return;
@@ -65,7 +71,10 @@ export default class MoveWindow extends React.Component {
                     timeLeft={this.state.timeLeft}
                 />
                 <Score score={this.state.score} />
-                <WordCard word={this.state.currentWord} />
+                <WordCard
+                    word={this.state.currentWord}
+                    dictionary={this.state.currentWordDictionary}
+                />
                 <div className="buttons-container">
                     <button className="button secondary" onClick={this.setNewWord}>
                         <FontAwesomeIcon icon={faTimes} className="icon-button" />

@@ -1,91 +1,96 @@
-@import url('https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 @import "button.scss";
 @import "move.scss";
 @import "card.scss";
 @import "./window/Settings.scss";
 
 body {
-    margin: 0;
-    background-color: #F9F9F9;
+  margin: 0;
+  background-color: #f9f9f9;
 }
 
 .app-container {
-    margin: auto;
-    padding: 15px;
-    max-width: 700px;
-    font-family: 'Kelly Slab', cursive;
-    color: #404040;
-    letter-spacing: 0.8px;
-    font-weight: 500;
-    background-color: #F9F9F9;
+  margin: auto;
+  padding: 15px;
+  max-width: 700px;
+  font-family: "Kelly Slab", cursive;
+  color: #404040;
+  letter-spacing: 0.8px;
+  font-weight: 500;
+  background-color: #f9f9f9;
 
-    .field-container {
-        margin-top: 10px;
+  .field-container {
+    margin-top: 10px;
 
-        &.team-name-container {
-            margin-right: 15px;
-        }
+    &.team-name-container {
+      margin-right: 15px;
     }
+  }
 
-    .textfield {
-        margin-right: 5px;
-        padding: 0 5px;
-        height: 30px;
-        width: 160px;
-        font-family: 'Roboto', sans-serif;
+  .textfield {
+    margin-right: 5px;
+    padding: 0 5px;
+    height: 30px;
+    width: 160px;
+    font-family: "Roboto", sans-serif;
 
-        &.small {
-            width: 40px;
-        }
+    &.small {
+      width: 40px;
     }
+  }
 
-    .numberfield {
-        margin-right: 10px;
-        height: 30px;
-        width: 60px;
-    }
+  .numberfield {
+    margin-right: 10px;
+    height: 30px;
+    width: 60px;
+  }
 
-    .checkbox {
-        margin-right: 10px;
-    }
+  .checkbox {
+    margin-right: 10px;
+  }
 }
 
 .title {
-    text-align: center;
-    margin: 20px 0;
-    font-size: large;
+  text-align: center;
+  margin: 20px 0;
+  font-size: large;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .header {
-    padding-top: 8px;
-    text-align: center;
-    
-    button {
-        font-family: 'Kelly Slab', cursive;
-        font-size: xx-large;
-        font-weight: 500;
-        letter-spacing: 0.8px;
+  padding-top: 8px;
+  text-align: center;
 
-        background-color: inherit;
-        color: #404040;
-        border: none;
-        cursor: pointer;
+  button {
+    font-family: "Kelly Slab", cursive;
+    font-size: xx-large;
+    font-weight: 500;
+    letter-spacing: 0.8px;
 
-        padding: 0 32px 32px 0;
-    }
+    background-color: inherit;
+    color: #404040;
+    border: none;
+    cursor: pointer;
+
+    padding: 0 32px 32px 0;
+  }
 }
 
 svg {
-    padding-right: 12px;
-    color: #ccc;
+  padding-right: 12px;
+  color: #ccc;
 
-    &.header-logo {
-        height: 40px;
-        color: #404040;
-    }
+  &.header-logo {
+    height: 40px;
+    color: #404040;
+  }
+}
+
+.sub-label {
+  font-family: "Roboto", sans-serif;
+  font-size: small;
 }

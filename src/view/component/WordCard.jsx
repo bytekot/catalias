@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const WordCard = ({ word }) => {
+const WordCard = ({ word, dictionary }) => {
     const [animated, setAnimated] = useState(false);
     const previousWordReference = useRef();
     const previousWord = previousWordReference.current;
@@ -23,7 +23,10 @@ const WordCard = ({ word }) => {
     return (
         <div className="card-container">
             <div className={`card ${animated ? 'animated' : ''}`}>
-                <span className="move-word">{!animated ? word : previousWord}</span>
+                <span className="move-word">
+                    <span>{!animated ? word : previousWord}</span>
+                    <p className="sub-label">({dictionary})</p>
+                </span>
             </div>
             <div className="card"></div>
             <div className="card"></div>

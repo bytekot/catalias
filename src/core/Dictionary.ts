@@ -19,7 +19,12 @@ export class Dictionary {
         this.words = [];
 
         for (const type of types) {
-            this.words = this.words.concat(dictionary[type]);
+            this.words = this.words.concat(
+              dictionary[type].map((word: string) => ({
+                word: word,
+                dictionary: type,
+              }))
+            );
         }
     }
 
