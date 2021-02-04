@@ -24,6 +24,7 @@ class App extends React.Component {
 
     onGameEnd = () => {
         this.setState({
+            move: undefined,
             game: undefined
         });
     }
@@ -52,20 +53,18 @@ class App extends React.Component {
 
     render() {
         const state = this.state;
+        let window;
 
         if (state.move) {
-            return (
+            window =
                 <MoveWindow
                     duration={state.moveDuration}
                     getWord={state.game.dictionary.getRandomWord.bind(state.game.dictionary)}
                     move={state.move}
                     onFinish={this.onMoveEnd}
                 />
-            )
-        }
-
-        return (
-            !state.game
+        } else {
+            window = !state.game
                 ? <SettingsWindow onButtonClick={this.onNewGameButtonClick} />
                 : <GameWindow
                     teamNames={state.teamNames}
@@ -74,16 +73,17 @@ class App extends React.Component {
                     game={state.game}
                     onFinish={this.onGameEnd}
                 />
+        }
+
+        return (
+            <div>
+                <Header onClick={this.onGameEnd} />
+                {window}
+            </div>
         );
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => 
-    ReactDOM.render(
-        <div>
-            <Header />
-            <App />
-        </div>,
-        document.body
-    )
-);
+document.addEventListener('DOMContentLoaded',  () => (
+    ReactDOM.render(<App />, document.body)
+));
