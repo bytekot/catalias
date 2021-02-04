@@ -90,6 +90,9 @@ $angle-o: 4px;
         box-shadow: none;
     }
 }
+  &.secondary {
+    background-color: #fff;
+  }
 
   .icon-button {
     color: $brown;
