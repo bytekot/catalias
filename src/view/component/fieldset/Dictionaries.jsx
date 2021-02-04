@@ -16,7 +16,7 @@ const DictionariesFieldset = ({ dictionaries }) => {
         }
 
         if (!checked && included) {
-            dictionaries.filter(dictionary => dictionary !== name);
+            dictionaries.splice(dictionaries.indexOf(name), 1);
         }
     };
 

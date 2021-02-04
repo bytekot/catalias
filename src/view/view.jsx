@@ -37,6 +37,7 @@ class App extends React.Component {
 
     onNewGameButtonClick = ({ teamNames, dictionaries, moveDuration, scoreToWin }) => {
         const teams = teamNames.map(name => new Team(name));
+        console.log(dictionaries);
         const dictionary = new Dictionary(dictionaries);
         const game = new Game(teams, dictionary, {
             moveDuration: moveDuration,
