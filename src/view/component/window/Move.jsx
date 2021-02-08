@@ -48,10 +48,12 @@ export default class MoveWindow extends React.Component {
         if (!this.props.move.isFinished()) {
             const currentWord = this.props.getWord();
 
-            this.setState({
-                currentWord: currentWord.word,
-                currentWordDictionary: currentWord.dictionary
-            });
+            if (currentWord) {
+                this.setState({
+                    currentWord: currentWord.word,
+                    currentWordDictionary: currentWord.dictionary
+                });
+            }
 
             return;
         }
