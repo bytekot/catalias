@@ -1,9 +1,9 @@
 import dictionary from '../dictionary.json';
 
-export const dictionaryTypes = Object.keys(dictionary);
+export const dictionaryTypes: string[] = Object.keys(dictionary);
 
-export const dictionaryReference = (dictionary => {
-    const reference = [];
+export const dictionaryReference = ((dictionary: any)=> {
+    const reference: any = {};
 
     for (const type in dictionary) {
         reference[type] = dictionary[type].length;
@@ -15,15 +15,17 @@ export const dictionaryReference = (dictionary => {
 export class Dictionary {
     public readonly words: string[];
 
-    constructor(types = []) {
+    constructor(types: string[] = []) {
         this.words = [];
 
         for (const type of types) {
+            const words: any = dictionary;
+
             this.words = this.words.concat(
-              dictionary[type].map((word: string) => ({
-                word: word,
-                dictionary: type,
-              }))
+                words[type].map((word: string) => ({
+                    word: word,
+                    dictionary: type,
+                }))
             );
         }
     }

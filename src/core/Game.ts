@@ -26,7 +26,7 @@ export class Game {
     getCurrentTeam(): Team {
         const currentRound = this.getCurrentRound();
 
-        let currentTeam: Team;
+        let currentTeam;
 
         for (const team of this.teams) {
             if (team.moves < currentRound) {
@@ -36,7 +36,7 @@ export class Game {
             }
         }
 
-        return (typeof currentTeam !== 'undefined') ? currentTeam : this.teams[0];
+        return (currentTeam !== undefined) ? currentTeam : this.teams[0];
     }
 
     isFinished(): boolean {
@@ -54,7 +54,7 @@ export class Game {
     }
 
     isAdditionalRoundNeeded(): boolean {
-        const enoughPoints = [];
+        const enoughPoints: number[] = [];
 
         for (const team of this.teams) {
             if (team.score >= this.scoreToWin) {
