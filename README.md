@@ -1,2 +1,2 @@
 # Catalias
-Alias game in development. Latest deployment: https://bytekot.github.io/catalias
+Alias game (demo): https://bytekot.github.io/catalias
